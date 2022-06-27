@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">NFrameUI</string>
     <string name="n_frame">NFrame</string>
+    <string name="n_frame_settings">NFrame 設定</string>
     <string name="n_layout">NLayout</string>
     <string name="n_card">NCard</string>
 </resources>
