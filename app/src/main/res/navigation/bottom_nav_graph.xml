@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@+id/n_frame">
+    <fragment
+        android:id="@+id/n_frame"
+        android:name="nico.ed.nnn.zane.nframe.NFrameFragment" />
+    <fragment
+        android:id="@+id/n_layout"
+        android:name="nico.ed.nnn.zane.nframe.NLayoutFragment" />
+    <fragment
+        android:id="@+id/n_card"
+        android:name="nico.ed.nnn.zane.nframe.NCardFragment" />
+</navigation>

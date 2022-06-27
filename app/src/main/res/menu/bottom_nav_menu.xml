@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/n_frame"
+        android:icon="@drawable/ic_n_frame"
+        android:title="@string/n_frame" />
+    <item
+        android:id="@+id/n_layout"
+        android:icon="@drawable/ic_n_layout"
+        android:title="@string/n_layout" />
+    <item
+        android:id="@+id/n_card"
+        android:icon="@drawable/ic_n_card"
+        android:title="@string/n_card" />
+</menu>
