@@ -17,3 +17,14 @@ enum class NLayoutDirection(private val value: String) {
         return value
     }
 }
+
+enum class NLayoutItemAlign(private val value: String) {
+    START("Start"),
+    CENTER("Center"),
+    END("End"),
+    STRETCH("Stretch");
+
+    override fun toString(): String {
+        return value
+    }
+}

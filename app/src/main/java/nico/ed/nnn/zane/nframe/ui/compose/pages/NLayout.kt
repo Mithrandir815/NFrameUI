@@ -6,11 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nico.ed.nnn.zane.nframe.R
 import nico.ed.nnn.zane.nframe.data.NLayoutDirection
+import nico.ed.nnn.zane.nframe.data.NLayoutItemAlign
 import nico.ed.nnn.zane.nframe.data.NLayoutType
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.NFrameTopAppBar
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.SelectionMenu
@@ -74,6 +71,33 @@ fun NLayout() {
                     onValueChange = { lineSpacing = it }
                 )
             }
+
+            /**
+             * Item Wrap の設定
+             */
+            var itemWrap by remember { mutableStateOf(0f) }
+            Text(
+                text = "Item Wrap",
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(text = itemWrap.toInt().toString(), Modifier.width(20.dp))
+                SliderMenu(
+                    value = itemWrap,
+                    onValueChange = { itemWrap = it }
+                )
+            }
+
+            /**
+             * Item Align の設定
+             */
+            var itemAlign by remember { mutableStateOf(NLayoutItemAlign.START) }
+            Text(text = "Item Align", modifier = Modifier.padding(vertical = 12.dp))
+            SelectionMenu(
+                options = NLayoutItemAlign.values().toList(),
+                selectedValue = itemAlign.toString(),
+                selectOption = { itemAlign = it }
+            )
         }
     }
 }
