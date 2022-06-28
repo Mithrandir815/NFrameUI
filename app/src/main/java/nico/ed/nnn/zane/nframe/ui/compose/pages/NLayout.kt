@@ -65,7 +65,10 @@ fun NLayout() {
              * Line の設定
              */
             var lineSpacing by remember { mutableStateOf(0f) }
-            Text(text = "Line Spacing", modifier = Modifier.padding(vertical = 12.dp))
+            Text(
+                text = "Line（Item Wrapが0であれば無効）",
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(text = lineSpacing.toInt().toString(), Modifier.width(20.dp))
                 SliderMenu(
