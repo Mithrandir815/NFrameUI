@@ -4,11 +4,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,6 +37,7 @@ fun NLayout() {
             Modifier
                 .padding(padding)
                 .padding(16.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             /**
              * Type の設定
@@ -97,6 +103,47 @@ fun NLayout() {
                 options = NLayoutItemAlign.values().toList(),
                 selectedValue = itemAlign.toString(),
                 selectOption = { itemAlign = it }
+            )
+
+            /**
+             * Edge Spacing の設定
+             */
+            var topEdgeSpacing by remember { mutableStateOf(0) }
+            var leftEdgeSpacing by remember { mutableStateOf(0) }
+            var rightEdgeSpacing by remember { mutableStateOf(0) }
+            var bottomEdgeSpacing by remember { mutableStateOf(0) }
+            Text(text = "Edge Spacing", modifier = Modifier.padding(vertical = 12.dp))
+            TextField(
+                value = topEdgeSpacing.toString(),
+                onValueChange = { topEdgeSpacing = if (it.isEmpty()) 0 else it.toInt() },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                label = { Text(text = "top") },
+                modifier = Modifier.width(100.dp)
+            )
+            Row(modifier = Modifier.padding(vertical = 12.dp)) {
+                TextField(
+                    value = leftEdgeSpacing.toString(),
+                    onValueChange = { leftEdgeSpacing = if (it.isEmpty()) 0 else it.toInt() },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    label = { Text(text = "left") },
+                    modifier = Modifier
+                        .padding(end = 12.dp)
+                        .width(100.dp)
+                )
+                TextField(
+                    value = rightEdgeSpacing.toString(),
+                    onValueChange = { rightEdgeSpacing = if (it.isEmpty()) 0 else it.toInt() },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    label = { Text(text = "right") },
+                    modifier = Modifier.width(100.dp)
+                )
+            }
+            TextField(
+                value = bottomEdgeSpacing.toString(),
+                onValueChange = { bottomEdgeSpacing = if (it.isEmpty()) 0 else it.toInt() },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                label = { Text(text = "bottom") },
+                modifier = Modifier.width(100.dp)
             )
         }
     }
