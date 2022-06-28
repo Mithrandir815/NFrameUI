@@ -8,3 +8,12 @@ enum class NLayoutType(private val value: String) {
         return value
     }
 }
+
+enum class NLayoutDirection(private val value: String) {
+    ROW("Row"),
+    COLUMN("Column");
+
+    override fun toString(): String {
+        return value
+    }
+}
