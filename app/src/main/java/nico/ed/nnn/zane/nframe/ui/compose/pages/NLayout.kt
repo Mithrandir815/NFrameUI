@@ -67,7 +67,7 @@ fun NLayout() {
             var lineSpacing by remember { mutableStateOf(0f) }
             Text(text = "Line Spacing", modifier = Modifier.padding(vertical = 12.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(text = lineSpacing.toString(), Modifier.width(20.dp))
+                Text(text = lineSpacing.toInt().toString(), Modifier.width(20.dp))
                 SliderMenu(
                     value = lineSpacing,
                     onValueChange = { lineSpacing = it }
