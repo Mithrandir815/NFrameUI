@@ -1,20 +1,29 @@
 package nico.ed.nnn.zane.nframe.ui.compose.atoms
 
-import androidx.compose.material.*
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ExposedDropdownMenuBox
+import androidx.compose.material.ExposedDropdownMenuDefaults
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun <T> SelectionMenu(
-    expanded: Boolean,
-    onExpandedChange: (Boolean) -> Unit,
     options: List<T>,
     selectedValue: String,
     selectOption: (T) -> Unit
 ) {
+    var expanded by remember { mutableStateOf(false) }
+
     ExposedDropdownMenuBox(
         expanded = expanded,
-        onExpandedChange = onExpandedChange
+        onExpandedChange = { expanded = !expanded }
     ) {
         TextField(
             readOnly = true,
@@ -29,13 +38,13 @@ fun <T> SelectionMenu(
         )
         ExposedDropdownMenu(
             expanded = expanded,
-            onDismissRequest = { onExpandedChange(false) }
+            onDismissRequest = { expanded = false }
         ) {
             options.forEach { selectionOption ->
                 DropdownMenuItem(
                     onClick = {
                         selectOption(selectionOption)
-                        onExpandedChange(false)
+                        expanded = false
                     }
                 ) {
                     Text(text = selectionOption.toString())

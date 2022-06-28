@@ -6,7 +6,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,13 +39,10 @@ fun NLayout() {
             /**
              * Type の設定
              */
-            var typeMenuExpanded by remember { mutableStateOf(false) }
             var typeSelected by remember { mutableStateOf(NLayoutType.FLOW) }
             Text(text = "設定項目", fontSize = 18.sp, modifier = Modifier.padding(bottom = 12.dp))
             Text(text = "Type", modifier = Modifier.padding(bottom = 12.dp))
             SelectionMenu(
-                expanded = typeMenuExpanded,
-                onExpandedChange = { typeMenuExpanded = it },
                 options = NLayoutType.values().toList(),
                 selectedValue = typeSelected.toString(),
                 selectOption = { typeSelected = it }
@@ -50,15 +51,12 @@ fun NLayout() {
             /**
              * Direction の設定
              */
-            var directionMenuExpanded by remember { mutableStateOf(false) }
             var directionSelected by remember { mutableStateOf(NLayoutDirection.ROW) }
             Text(text = "Direction", modifier = Modifier.padding(vertical = 12.dp))
             SelectionMenu(
-                expanded = directionMenuExpanded,
-                onExpandedChange = { directionMenuExpanded = it },
                 options = NLayoutDirection.values().toList(),
                 selectedValue = directionSelected.toString(),
-                selectOption = { directionSelected = it as NLayoutDirection }
+                selectOption = { directionSelected = it }
             )
 
             /**
