@@ -56,7 +56,7 @@ fun NLayout() {
             SelectionMenu(
                 expanded = directionMenuExpanded,
                 onExpandedChange = { directionMenuExpanded = it },
-                options = NLayoutType.values().toList(),
+                options = NLayoutDirection.values().toList(),
                 selectedValue = directionSelected.toString(),
                 selectOption = { directionSelected = it as NLayoutDirection }
             )
