@@ -20,7 +20,6 @@ fun SelectionMenu(
             readOnly = true,
             value = selectedValue,
             onValueChange = { },
-            label = { Text("Label") },
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(
                     expanded = expanded
