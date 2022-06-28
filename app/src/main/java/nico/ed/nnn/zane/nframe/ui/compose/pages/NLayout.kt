@@ -115,7 +115,7 @@ fun NLayout() {
             Text(text = "Edge Spacing", modifier = Modifier.padding(vertical = 12.dp))
             TextField(
                 value = topEdgeSpacing.toString(),
-                onValueChange = { topEdgeSpacing = if (it.isEmpty()) 0 else it.toInt() },
+                onValueChange = { topEdgeSpacing = it.toIntOrNull() ?: 0 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 label = { Text(text = "top") },
                 modifier = Modifier.width(100.dp)
@@ -123,7 +123,7 @@ fun NLayout() {
             Row(modifier = Modifier.padding(vertical = 12.dp)) {
                 TextField(
                     value = leftEdgeSpacing.toString(),
-                    onValueChange = { leftEdgeSpacing = if (it.isEmpty()) 0 else it.toInt() },
+                    onValueChange = { leftEdgeSpacing = it.toIntOrNull() ?: 0 },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     label = { Text(text = "left") },
                     modifier = Modifier
@@ -132,7 +132,7 @@ fun NLayout() {
                 )
                 TextField(
                     value = rightEdgeSpacing.toString(),
-                    onValueChange = { rightEdgeSpacing = if (it.isEmpty()) 0 else it.toInt() },
+                    onValueChange = { rightEdgeSpacing = it.toIntOrNull() ?: 0 },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     label = { Text(text = "right") },
                     modifier = Modifier.width(100.dp)
@@ -140,7 +140,7 @@ fun NLayout() {
             }
             TextField(
                 value = bottomEdgeSpacing.toString(),
-                onValueChange = { bottomEdgeSpacing = if (it.isEmpty()) 0 else it.toInt() },
+                onValueChange = { bottomEdgeSpacing = it.toIntOrNull() ?: 0 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 label = { Text(text = "bottom") },
                 modifier = Modifier.width(100.dp)
