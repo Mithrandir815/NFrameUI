@@ -39,7 +39,7 @@ fun NLayout() {
                 onExpandedChange = { typeMenuExpanded = it },
                 options = NLayoutType.values().toList(),
                 selectedValue = typeSelected.toString(),
-                selectOption = { typeSelected = it as NLayoutType }
+                selectOption = { typeSelected = it }
             )
         }
     }

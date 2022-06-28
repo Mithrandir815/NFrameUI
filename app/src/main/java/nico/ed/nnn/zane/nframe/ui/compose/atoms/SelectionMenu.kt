@@ -5,12 +5,12 @@ import androidx.compose.runtime.Composable
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SelectionMenu(
+fun <T> SelectionMenu(
     expanded: Boolean,
     onExpandedChange: (Boolean) -> Unit,
-    options: List<Any>,
+    options: List<T>,
     selectedValue: String,
-    selectOption: (Any) -> Unit
+    selectOption: (T) -> Unit
 ) {
     ExposedDropdownMenuBox(
         expanded = expanded,
