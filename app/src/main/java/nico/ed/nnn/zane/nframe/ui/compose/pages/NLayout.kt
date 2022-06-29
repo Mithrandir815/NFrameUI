@@ -8,6 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Slider
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
@@ -65,16 +66,16 @@ fun NLayout() {
             /**
              * Line の設定
              */
-            var lineSpacing by remember { mutableStateOf(0f) }
+            var line by remember { mutableStateOf(0f) }
             Text(
                 text = "Line（Item Wrapが0であれば無効）",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(text = lineSpacing.toInt().toString(), Modifier.width(20.dp))
+                Text(text = line.toInt().toString(), Modifier.width(20.dp))
                 SliderMenu(
-                    value = lineSpacing,
-                    onValueChange = { lineSpacing = it }
+                    value = line,
+                    onValueChange = { line = it }
                 )
             }
 
@@ -145,6 +146,42 @@ fun NLayout() {
                 label = { Text(text = "bottom") },
                 modifier = Modifier.width(100.dp)
             )
+
+            /**
+             * Line Spacing の設定
+             */
+            var lineSpacing by remember { mutableStateOf(0f) }
+            Text(
+                text = "Line Spacing",
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(text = lineSpacing.toInt().toString(), Modifier.width(20.dp))
+                Slider(
+                    value = lineSpacing,
+                    onValueChange = { lineSpacing = it },
+                    valueRange = 0f..32f,
+                    steps = 7
+                )
+            }
+
+            /**
+             * Item Spacing の設定
+             */
+            var itemSpacing by remember { mutableStateOf(0f) }
+            Text(
+                text = "Item Spacing",
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(text = itemSpacing.toInt().toString(), Modifier.width(20.dp))
+                Slider(
+                    value = itemSpacing,
+                    onValueChange = { itemSpacing = it },
+                    valueRange = 0f..32f,
+                    steps = 7
+                )
+            }
         }
     }
 }
