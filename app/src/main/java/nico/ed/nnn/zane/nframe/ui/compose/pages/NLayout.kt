@@ -5,16 +5,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Slider
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -114,74 +110,66 @@ fun NLayout() {
             var rightEdgeSpacing by remember { mutableStateOf(0) }
             var bottomEdgeSpacing by remember { mutableStateOf(0) }
             Text(text = "Edge Spacing", modifier = Modifier.padding(vertical = 12.dp))
-            TextField(
-                value = topEdgeSpacing.toString(),
-                onValueChange = { topEdgeSpacing = it.toIntOrNull() ?: 0 },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                label = { Text(text = "top") },
-                modifier = Modifier.width(100.dp)
+            SelectionMenu(
+                options = listOf(0, 1, 2, 3, 4),
+                selectedValue = (topEdgeSpacing / 8).toString(),
+                selectOption = { topEdgeSpacing = it * 8 },
+                modifier = Modifier.width(120.dp),
+                label = "top"
             )
             Row(modifier = Modifier.padding(vertical = 12.dp)) {
-                TextField(
-                    value = leftEdgeSpacing.toString(),
-                    onValueChange = { leftEdgeSpacing = it.toIntOrNull() ?: 0 },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    label = { Text(text = "left") },
+                SelectionMenu(
+                    options = listOf(0, 1, 2, 3, 4),
+                    selectedValue = (leftEdgeSpacing / 8).toString(),
+                    selectOption = { leftEdgeSpacing = it * 8 },
                     modifier = Modifier
                         .padding(end = 12.dp)
-                        .width(100.dp)
+                        .width(120.dp),
+                    label = "left"
                 )
-                TextField(
-                    value = rightEdgeSpacing.toString(),
-                    onValueChange = { rightEdgeSpacing = it.toIntOrNull() ?: 0 },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    label = { Text(text = "right") },
-                    modifier = Modifier.width(100.dp)
+                SelectionMenu(
+                    options = listOf(0, 1, 2, 3, 4),
+                    selectedValue = (rightEdgeSpacing / 8).toString(),
+                    selectOption = { rightEdgeSpacing = it * 8 },
+                    modifier = Modifier.width(120.dp),
+                    label = "right"
                 )
             }
-            TextField(
-                value = bottomEdgeSpacing.toString(),
-                onValueChange = { bottomEdgeSpacing = it.toIntOrNull() ?: 0 },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                label = { Text(text = "bottom") },
-                modifier = Modifier.width(100.dp)
+            SelectionMenu(
+                options = listOf(0, 1, 2, 3, 4),
+                selectedValue = (bottomEdgeSpacing / 8).toString(),
+                selectOption = { bottomEdgeSpacing = it * 8 },
+                modifier = Modifier.width(120.dp),
+                label = "bottom"
             )
 
             /**
              * Line Spacing の設定
              */
-            var lineSpacing by remember { mutableStateOf(0f) }
+            var lineSpacing by remember { mutableStateOf(0) }
             Text(
                 text = "Line Spacing",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(text = lineSpacing.toInt().toString(), Modifier.width(20.dp))
-                Slider(
-                    value = lineSpacing,
-                    onValueChange = { lineSpacing = it },
-                    valueRange = 0f..32f,
-                    steps = 7
-                )
-            }
+            SelectionMenu(
+                options = listOf(0, 1, 2, 3, 4),
+                selectedValue = (lineSpacing / 4).toString(),
+                selectOption = { lineSpacing = it * 4 }
+            )
 
             /**
              * Item Spacing の設定
              */
-            var itemSpacing by remember { mutableStateOf(0f) }
+            var itemSpacing by remember { mutableStateOf(0) }
             Text(
                 text = "Item Spacing",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(text = itemSpacing.toInt().toString(), Modifier.width(20.dp))
-                Slider(
-                    value = itemSpacing,
-                    onValueChange = { itemSpacing = it },
-                    valueRange = 0f..32f,
-                    steps = 7
-                )
-            }
+            SelectionMenu(
+                options = listOf(0, 1, 2, 3, 4),
+                selectedValue = (itemSpacing / 4).toString(),
+                selectOption = { itemSpacing = it * 4 }
+            )
         }
     }
 }
