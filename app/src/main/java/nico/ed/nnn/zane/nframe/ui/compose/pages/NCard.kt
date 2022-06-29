@@ -2,6 +2,8 @@ package nico.ed.nnn.zane.nframe.ui.compose.pages
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +33,7 @@ fun NCard() {
             modifier = Modifier
                 .padding(padding)
                 .padding(16.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             Text(text = "設定項目", fontSize = 18.sp)
 
@@ -98,6 +101,50 @@ fun NCard() {
                 selectOption = {
                     subtitleSelected = it
                 }
+            )
+
+            /**
+             * Clickable の設定
+             */
+            var clickableSelected by remember { mutableStateOf(true) }
+            Text(
+                text = "NCardHead - Clickable",
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
+            SelectionMenu(
+                options = listOf(true, false),
+                selectedValue = clickableSelected.toString(),
+                selectOption = {
+                    clickableSelected = it
+                }
+            )
+
+            /**
+             * メニューの設定
+             */
+            var menuSelected by remember { mutableStateOf(PresentAbsent.PRESENT) }
+            Text(
+                text = "NCardHead - メニュー",
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
+            SelectionMenu(
+                options = PresentAbsent.values().toList(),
+                selectedValue = menuSelected.toString(),
+                selectOption = { menuSelected = it }
+            )
+
+            /**
+             * NCardFoot の設定
+             */
+            var nCardFootSelected by remember { mutableStateOf(PresentAbsent.PRESENT) }
+            Text(
+                text = "NCardFoot",
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
+            SelectionMenu(
+                options = PresentAbsent.values().toList(),
+                selectedValue = nCardFootSelected.toString(),
+                selectOption = { nCardFootSelected = it }
             )
         }
     }
