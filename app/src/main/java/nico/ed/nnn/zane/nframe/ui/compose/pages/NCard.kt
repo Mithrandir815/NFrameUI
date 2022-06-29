@@ -29,6 +29,7 @@ import nico.ed.nnn.zane.nframe.data.NCardMedia
 import nico.ed.nnn.zane.nframe.data.PresentAbsent
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.NFrameTopAppBar
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.SelectionMenu
+import nico.ed.nnn.zane.nframe.ui.compose.organisms.NFrameExoPlayer
 
 @Preview
 @Composable
@@ -182,8 +183,7 @@ fun NCard() {
                                 .fillMaxSize()
                         )
                     }
-                    NCardMedia.MOVIE -> {
-                    }
+                    NCardMedia.MOVIE -> NFrameExoPlayer("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
                     NCardMedia.NONE -> {}
                 }
             }
