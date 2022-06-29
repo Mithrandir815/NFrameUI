@@ -1,23 +1,17 @@
 package nico.ed.nnn.zane.nframe.ui.compose.atoms
 
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ExposedDropdownMenuBox
-import androidx.compose.material.ExposedDropdownMenuDefaults
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun <T> SelectionMenu(
     options: List<T>,
     selectedValue: String,
-    selectOption: (T) -> Unit
+    selectOption: (T) -> Unit,
+    modifier: Modifier = Modifier,
+    label: String? = null
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -34,7 +28,11 @@ fun <T> SelectionMenu(
                     expanded = expanded
                 )
             },
-            colors = ExposedDropdownMenuDefaults.textFieldColors()
+            colors = ExposedDropdownMenuDefaults.textFieldColors(),
+            modifier = modifier,
+            label = if (label != null) {
+                { Text(text = label) }
+            } else null
         )
         ExposedDropdownMenu(
             expanded = expanded,
