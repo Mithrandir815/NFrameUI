@@ -19,16 +19,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import nico.ed.nnn.zane.nframe.R
 import nico.ed.nnn.zane.nframe.data.NCardMedia
+import nico.ed.nnn.zane.nframe.ui.theme.Gray400
 import nico.ed.nnn.zane.nframe.ui.theme.Gray500
 
 @Composable
 fun NCardPreview(
     nCardMedia: NCardMedia,
     hasIcon: Boolean,
-    hasTitle: Boolean
+    hasTitle: Boolean,
+    hasSubtitle: Boolean
 ) {
     Card(
         modifier = Modifier
@@ -40,8 +43,15 @@ fun NCardPreview(
             val (
                 n_card_media,
                 icon,
-                title
+                title,
+                subtitle
             ) = createRefs()
+
+            // タイトルとサブタイトルを隙間なく上下に並べるために Packed を使う。
+            constrain(createVerticalChain(title, subtitle, chainStyle = ChainStyle.Packed)) {
+                top.linkTo(n_card_media.bottom)
+                bottom.linkTo(parent.bottom)
+            }
 
             Box(
                 Modifier
@@ -93,11 +103,24 @@ fun NCardPreview(
                         .padding(start = if (hasIcon) 8.dp else 16.dp)
                         .constrainAs(title) {
                             start.linkTo(icon.end)
-                            top.linkTo(n_card_media.bottom)
-                            bottom.linkTo(parent.bottom)
+                            bottom.linkTo(subtitle.top)
                         },
                     color = Gray500,
                     fontSize = 14.sp
+                )
+            }
+
+            if (hasSubtitle) {
+                Text(
+                    text = "カードサブタイトル",
+                    modifier = Modifier
+                        .padding(start = if (hasIcon) 8.dp else 16.dp)
+                        .constrainAs(subtitle) {
+                            start.linkTo(icon.end)
+                            top.linkTo(title.bottom)
+                        },
+                    color = Gray400,
+                    fontSize = 12.sp
                 )
             }
         }
@@ -110,6 +133,7 @@ private fun PreviewNCardPreview() {
     NCardPreview(
         nCardMedia = NCardMedia.IMAGE,
         hasIcon = true,
-        hasTitle = true
+        hasTitle = true,
+        hasSubtitle = true
     )
 }
