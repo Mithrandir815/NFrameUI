@@ -156,7 +156,8 @@ fun NCard() {
 
             NCardPreview(
                 nCardMedia = nCardMediaSelected,
-                hasIcon = iconSelected == PresentAbsent.PRESENT
+                hasIcon = iconSelected == PresentAbsent.PRESENT,
+                hasTitle = titleSelected == PresentAbsent.PRESENT
             )
         }
     }

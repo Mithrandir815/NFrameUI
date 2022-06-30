@@ -11,20 +11,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import nico.ed.nnn.zane.nframe.R
 import nico.ed.nnn.zane.nframe.data.NCardMedia
+import nico.ed.nnn.zane.nframe.ui.theme.Gray500
 
 @Composable
 fun NCardPreview(
     nCardMedia: NCardMedia,
-    hasIcon: Boolean
+    hasIcon: Boolean,
+    hasTitle: Boolean
 ) {
     Card(
         modifier = Modifier
@@ -33,8 +37,10 @@ fun NCardPreview(
             .height(220.dp)
     ) {
         ConstraintLayout {
-            val (n_card_media,
-                icon
+            val (
+                n_card_media,
+                icon,
+                title
             ) = createRefs()
 
             Box(
@@ -79,6 +85,21 @@ fun NCardPreview(
                     contentDescription = null
                 )
             }
+
+            if (hasTitle) {
+                Text(
+                    text = "カードタイトル",
+                    modifier = Modifier
+                        .padding(start = if (hasIcon) 8.dp else 16.dp)
+                        .constrainAs(title) {
+                            start.linkTo(icon.end)
+                            top.linkTo(n_card_media.bottom)
+                            bottom.linkTo(parent.bottom)
+                        },
+                    color = Gray500,
+                    fontSize = 14.sp
+                )
+            }
         }
     }
 }
@@ -88,6 +109,7 @@ fun NCardPreview(
 private fun PreviewNCardPreview() {
     NCardPreview(
         nCardMedia = NCardMedia.IMAGE,
-        hasIcon = true
+        hasIcon = true,
+        hasTitle = true
     )
 }
