@@ -1,6 +1,7 @@
 package nico.ed.nnn.zane.nframe.ui.compose.organisms
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.exoplayer2.ExoPlayer
@@ -8,7 +9,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.ui.StyledPlayerView
 
 @Composable
-fun NFrameExoPlayer(uri: String) {
+fun NFrameExoPlayer(modifier: Modifier = Modifier, uri: String) {
     AndroidView(
         factory = {
             StyledPlayerView(it).apply {
@@ -16,12 +17,13 @@ fun NFrameExoPlayer(uri: String) {
                     setMediaItem(MediaItem.fromUri(uri))
                 }
             }
-        }
+        },
+        modifier = modifier
     )
 }
 
 @Preview
 @Composable
 private fun PreviewNFrameExoPlayer() {
-    NFrameExoPlayer("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+    NFrameExoPlayer(uri = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
 }
