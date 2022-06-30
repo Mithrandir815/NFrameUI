@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -22,7 +23,8 @@ import nico.ed.nnn.zane.nframe.data.NCardMedia
 
 @Composable
 fun NCardPreview(
-    nCardMedia: NCardMedia
+    nCardMedia: NCardMedia,
+    hasIcon: Boolean
 ) {
     Card(
         modifier = Modifier
@@ -31,7 +33,9 @@ fun NCardPreview(
             .height(220.dp)
     ) {
         ConstraintLayout {
-            val (n_card_media) = createRefs()
+            val (n_card_media,
+                icon
+            ) = createRefs()
 
             Box(
                 Modifier
@@ -61,6 +65,20 @@ fun NCardPreview(
                     NCardMedia.NONE -> {}
                 }
             }
+
+            if (hasIcon) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_n_card_head_icon),
+                    modifier = Modifier
+                        .size(20.dp)
+                        .constrainAs(icon) {
+                            start.linkTo(parent.start, 16.dp)
+                            top.linkTo(n_card_media.bottom)
+                            bottom.linkTo(parent.bottom)
+                        },
+                    contentDescription = null
+                )
+            }
         }
     }
 }
@@ -68,5 +86,8 @@ fun NCardPreview(
 @Preview
 @Composable
 private fun PreviewNCardPreview() {
-    NCardPreview(NCardMedia.IMAGE)
+    NCardPreview(
+        nCardMedia = NCardMedia.IMAGE,
+        hasIcon = true
+    )
 }

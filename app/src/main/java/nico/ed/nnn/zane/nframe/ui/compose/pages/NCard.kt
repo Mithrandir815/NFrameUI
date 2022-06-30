@@ -150,11 +150,14 @@ fun NCard() {
 
             Text(
                 text = "表示確認",
-                fontSize = 18.sp,
-                modifier = Modifier.padding(vertical = 12.dp)
+                modifier = Modifier.padding(vertical = 12.dp),
+                fontSize = 18.sp
             )
 
-            NCardPreview(nCardMediaSelected)
+            NCardPreview(
+                nCardMedia = nCardMediaSelected,
+                hasIcon = iconSelected == PresentAbsent.PRESENT
+            )
         }
     }
 }
