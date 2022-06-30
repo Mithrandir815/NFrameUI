@@ -73,7 +73,6 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
     implementation 'com.google.android.exoplayer:exoplayer:2.18.0'
-    implementation 'com.google.android.material:compose-theme-adapter-3:1.0.13'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'io.coil-kt:coil-compose:2.1.0'
     kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"

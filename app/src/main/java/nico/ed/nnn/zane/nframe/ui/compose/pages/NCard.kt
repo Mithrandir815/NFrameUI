@@ -1,18 +1,9 @@
 package nico.ed.nnn.zane.nframe.ui.compose.pages
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -21,18 +12,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 import nico.ed.nnn.zane.nframe.R
 import nico.ed.nnn.zane.nframe.data.NCardMedia
 import nico.ed.nnn.zane.nframe.data.PresentAbsent
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.NFrameTopAppBar
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.SelectionMenu
-import nico.ed.nnn.zane.nframe.ui.compose.organisms.NFrameExoPlayer
+import nico.ed.nnn.zane.nframe.ui.compose.organisms.NCardPreview
 
 @Preview
 @Composable
@@ -166,45 +154,7 @@ fun NCard() {
                 modifier = Modifier.padding(vertical = 12.dp)
             )
 
-            Card(
-                modifier = Modifier
-                    .padding(bottom = 2.dp) // Card の下端に padding で隙間を作らないと、Card の影が表示されない。
-                    .width(316.dp)
-                    .height(220.dp)
-            ) {
-                ConstraintLayout {
-                    val (n_card_media) = createRefs()
-
-                    Box(
-                        Modifier
-                            .fillMaxWidth()
-                            .height(160.dp)
-                            .constrainAs(n_card_media) {
-                                start.linkTo(parent.start)
-                                top.linkTo(parent.top)
-                                end.linkTo(parent.end)
-                            }
-                    ) {
-                        when (nCardMediaSelected) {
-                            NCardMedia.IMAGE -> Image(
-                                painter = painterResource(id = R.drawable.sample),
-                                modifier = Modifier.fillMaxSize(),
-                                contentDescription = null
-                            )
-                            NCardMedia.SOLID -> Spacer(
-                                Modifier
-                                    .background(Color(0xff828282))
-                                    .fillMaxSize()
-                            )
-                            NCardMedia.MOVIE -> NFrameExoPlayer(
-                                modifier = Modifier.fillMaxSize(),
-                                uri = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                            )
-                            NCardMedia.NONE -> {}
-                        }
-                    }
-                }
-            }
+            NCardPreview(nCardMediaSelected)
         }
     }
 }
