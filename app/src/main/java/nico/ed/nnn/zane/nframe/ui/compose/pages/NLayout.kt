@@ -60,7 +60,7 @@ fun NLayout() {
             SelectionMenu(
                 options = NLayoutDirection.values()
                     // Slider の場合は横方向のみが選択できるようにする
-                    .filter { if (typeSelected == NLayoutType.SLIDER) it == NLayoutDirection.COLUMN else true }
+                    .filter { typeSelected == NLayoutType.FLOW || it == NLayoutDirection.COLUMN }
                     .toList(),
                 selectedValue = directionSelected.toString(),
                 selectOption = { directionSelected = it }
