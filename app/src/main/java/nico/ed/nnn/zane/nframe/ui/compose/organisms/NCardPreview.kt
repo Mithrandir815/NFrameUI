@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,6 +19,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,7 +46,8 @@ fun NCardPreview(
     hasIcon: Boolean,
     hasTitle: Boolean,
     hasSubtitle: Boolean,
-    isClickable: Boolean
+    isClickable: Boolean,
+    hasMenu: Boolean
 ) {
     var isDialogVisible by remember { mutableStateOf(false) }
 
@@ -85,7 +88,8 @@ fun NCardPreview(
             ) {
                 ConstraintLayout(
                     Modifier
-                        .fillMaxSize()
+                        .fillMaxHeight()
+                        .weight(1f)
                         .clickable(
                             enabled = isClickable,
                             onClick = {
@@ -172,6 +176,14 @@ fun NCardPreview(
                         )
                     }
                 }
+                if (hasMenu) {
+                    Icon(
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = null,
+                        modifier = Modifier.padding(horizontal = 8.dp),
+                        tint = Gray500
+                    )
+                }
             }
         }
 
@@ -191,6 +203,7 @@ private fun PreviewNCardPreview() {
         hasIcon = true,
         hasTitle = true,
         hasSubtitle = true,
-        isClickable = true
+        isClickable = true,
+        hasMenu = true
     )
 }

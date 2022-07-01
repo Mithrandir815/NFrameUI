@@ -159,7 +159,8 @@ fun NCard() {
                 hasIcon = iconSelected == PresentAbsent.PRESENT,
                 hasTitle = titleSelected == PresentAbsent.PRESENT,
                 hasSubtitle = subtitleSelected == PresentAbsent.PRESENT,
-                isClickable = clickableSelected == PresentAbsent.PRESENT
+                isClickable = clickableSelected == PresentAbsent.PRESENT,
+                hasMenu = menuSelected == PresentAbsent.PRESENT
             )
         }
     }
