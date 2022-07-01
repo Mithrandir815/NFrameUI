@@ -2,7 +2,9 @@ package nico.ed.nnn.zane.nframe.ui.compose.organisms
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +18,10 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -38,30 +44,19 @@ fun NCardPreview(
     hasSubtitle: Boolean,
     isClickable: Boolean
 ) {
+    var isDialogVisible by remember { mutableStateOf(false) }
+
     Card(
         modifier = Modifier
             .padding(bottom = 2.dp) // Card の下端に padding で隙間を作らないと、Card の影が表示されない。
             .width(316.dp)
             .height(220.dp)
     ) {
-        ConstraintLayout {
-            val (
-                n_card_media,
-                icon,
-                title,
-                subtitle,
-                clickable
-            ) = createRefs()
-
+        Column(Modifier.fillMaxSize()) {
             Box(
                 Modifier
                     .fillMaxWidth()
                     .height(160.dp)
-                    .constrainAs(n_card_media) {
-                        start.linkTo(parent.start)
-                        top.linkTo(parent.top)
-                        end.linkTo(parent.end)
-                    }
             ) {
                 when (nCardMedia) {
                     NCardMedia.IMAGE -> Image(
@@ -81,71 +76,94 @@ fun NCardPreview(
                     NCardMedia.NONE -> {}
                 }
             }
+            ConstraintLayout(
+                Modifier
+                    .fillMaxSize()
+                    .clickable(
+                        enabled = isClickable,
+                        onClick = {
+                            isDialogVisible = true
+                        }
+                    )
+            ) {
+                val (
+                    icon,
+                    title,
+                    subtitle,
+                    clickable
+                ) = createRefs()
 
-            if (hasIcon) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_n_card_head_icon),
-                    modifier = Modifier
-                        .size(20.dp)
-                        .constrainAs(icon) {
-                            start.linkTo(parent.start, 16.dp)
-                            top.linkTo(n_card_media.bottom)
-                            bottom.linkTo(parent.bottom)
-                        },
-                    contentDescription = null
-                )
+                if (hasIcon) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_n_card_head_icon),
+                        modifier = Modifier
+                            .size(20.dp)
+                            .constrainAs(icon) {
+                                start.linkTo(parent.start, 16.dp)
+                                top.linkTo(parent.top)
+                                bottom.linkTo(parent.bottom)
+                            },
+                        contentDescription = null
+                    )
+                }
+
+                // タイトルとサブタイトルを隙間なく上下に並べるために Packed を使う。
+                constrain(createVerticalChain(title, subtitle, chainStyle = ChainStyle.Packed)) {
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                }
+
+                if (hasTitle) {
+                    Text(
+                        text = "カードタイトル",
+                        modifier = Modifier
+                            .padding(start = if (hasIcon) 8.dp else 16.dp)
+                            .constrainAs(title) {
+                                start.linkTo(icon.end)
+                                bottom.linkTo(subtitle.top)
+                            },
+                        color = Gray500,
+                        fontSize = 14.sp
+                    )
+                }
+
+                if (hasSubtitle) {
+                    Text(
+                        text = "カードサブタイトル",
+                        modifier = Modifier
+                            .padding(start = if (hasIcon) 8.dp else 16.dp)
+                            .constrainAs(subtitle) {
+                                start.linkTo(icon.end)
+                                top.linkTo(title.bottom)
+                            },
+                        color = Gray400,
+                        fontSize = 12.sp
+                    )
+                }
+
+                // タイトルとサブタイトルのいずれか長い方の右隣に「＞」を表示する。
+                val titleAndSubtitleEndBarrier = createEndBarrier(title, subtitle)
+
+                if (isClickable) {
+                    Icon(
+                        imageVector = Icons.Default.ChevronRight,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(start = if (hasTitle || hasIcon) 0.dp else 8.dp)
+                            .constrainAs(clickable) {
+                                start.linkTo(if (hasTitle) titleAndSubtitleEndBarrier else icon.end)
+                                top.linkTo(parent.top)
+                                bottom.linkTo(parent.bottom)
+                            },
+                        tint = Blue500
+                    )
+                }
             }
+        }
 
-            // タイトルとサブタイトルを隙間なく上下に並べるために Packed を使う。
-            constrain(createVerticalChain(title, subtitle, chainStyle = ChainStyle.Packed)) {
-                top.linkTo(n_card_media.bottom)
-                bottom.linkTo(parent.bottom)
-            }
-
-            if (hasTitle) {
-                Text(
-                    text = "カードタイトル",
-                    modifier = Modifier
-                        .padding(start = if (hasIcon) 8.dp else 16.dp)
-                        .constrainAs(title) {
-                            start.linkTo(icon.end)
-                            bottom.linkTo(subtitle.top)
-                        },
-                    color = Gray500,
-                    fontSize = 14.sp
-                )
-            }
-
-            if (hasSubtitle) {
-                Text(
-                    text = "カードサブタイトル",
-                    modifier = Modifier
-                        .padding(start = if (hasIcon) 8.dp else 16.dp)
-                        .constrainAs(subtitle) {
-                            start.linkTo(icon.end)
-                            top.linkTo(title.bottom)
-                        },
-                    color = Gray400,
-                    fontSize = 12.sp
-                )
-            }
-
-            // タイトルとサブタイトルのいずれか長い方の右隣に「＞」を表示する。
-            val titleAndSubtitleEndBarrier = createEndBarrier(title, subtitle)
-
-            if (isClickable) {
-                Icon(
-                    imageVector = Icons.Default.ChevronRight,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(start = if (hasTitle || hasIcon) 0.dp else 8.dp)
-                        .constrainAs(clickable) {
-                            start.linkTo(if (hasTitle) titleAndSubtitleEndBarrier else icon.end)
-                            top.linkTo(n_card_media.bottom)
-                            bottom.linkTo(parent.bottom)
-                        },
-                    tint = Blue500
-                )
+        if (isDialogVisible) {
+            NFrameAlertDialog("クリックしました。") {
+                isDialogVisible = false
             }
         }
     }
