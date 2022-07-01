@@ -107,13 +107,13 @@ fun NCard() {
             /**
              * Clickable の設定
              */
-            var clickableSelected by remember { mutableStateOf(true) }
+            var clickableSelected by remember { mutableStateOf(PresentAbsent.PRESENT) }
             Text(
                 text = "NCardHead - Clickable",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             SelectionMenu(
-                options = listOf(true, false),
+                options = PresentAbsent.values().toList(),
                 selectedValue = clickableSelected.toString(),
                 selectOption = {
                     clickableSelected = it
@@ -158,7 +158,8 @@ fun NCard() {
                 nCardMedia = nCardMediaSelected,
                 hasIcon = iconSelected == PresentAbsent.PRESENT,
                 hasTitle = titleSelected == PresentAbsent.PRESENT,
-                hasSubtitle = subtitleSelected == PresentAbsent.PRESENT
+                hasSubtitle = subtitleSelected == PresentAbsent.PRESENT,
+                isClickable = clickableSelected == PresentAbsent.PRESENT
             )
         }
     }

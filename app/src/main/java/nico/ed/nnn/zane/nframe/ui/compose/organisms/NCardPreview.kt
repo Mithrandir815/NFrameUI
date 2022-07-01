@@ -11,7 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +26,7 @@ import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import nico.ed.nnn.zane.nframe.R
 import nico.ed.nnn.zane.nframe.data.NCardMedia
+import nico.ed.nnn.zane.nframe.ui.theme.Blue500
 import nico.ed.nnn.zane.nframe.ui.theme.Gray400
 import nico.ed.nnn.zane.nframe.ui.theme.Gray500
 
@@ -31,7 +35,8 @@ fun NCardPreview(
     nCardMedia: NCardMedia,
     hasIcon: Boolean,
     hasTitle: Boolean,
-    hasSubtitle: Boolean
+    hasSubtitle: Boolean,
+    isClickable: Boolean
 ) {
     Card(
         modifier = Modifier
@@ -44,14 +49,9 @@ fun NCardPreview(
                 n_card_media,
                 icon,
                 title,
-                subtitle
+                subtitle,
+                clickable
             ) = createRefs()
-
-            // タイトルとサブタイトルを隙間なく上下に並べるために Packed を使う。
-            constrain(createVerticalChain(title, subtitle, chainStyle = ChainStyle.Packed)) {
-                top.linkTo(n_card_media.bottom)
-                bottom.linkTo(parent.bottom)
-            }
 
             Box(
                 Modifier
@@ -96,6 +96,12 @@ fun NCardPreview(
                 )
             }
 
+            // タイトルとサブタイトルを隙間なく上下に並べるために Packed を使う。
+            constrain(createVerticalChain(title, subtitle, chainStyle = ChainStyle.Packed)) {
+                top.linkTo(n_card_media.bottom)
+                bottom.linkTo(parent.bottom)
+            }
+
             if (hasTitle) {
                 Text(
                     text = "カードタイトル",
@@ -123,6 +129,24 @@ fun NCardPreview(
                     fontSize = 12.sp
                 )
             }
+
+            // タイトルとサブタイトルのいずれか長い方の右隣に「＞」を表示する。
+            val titleAndSubtitleEndBarrier = createEndBarrier(title, subtitle)
+
+            if (isClickable) {
+                Icon(
+                    imageVector = Icons.Default.ChevronRight,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(start = if (hasTitle || hasIcon) 0.dp else 8.dp)
+                        .constrainAs(clickable) {
+                            start.linkTo(if (hasTitle) titleAndSubtitleEndBarrier else icon.end)
+                            top.linkTo(n_card_media.bottom)
+                            bottom.linkTo(parent.bottom)
+                        },
+                    tint = Blue500
+                )
+            }
         }
     }
 }
@@ -134,6 +158,7 @@ private fun PreviewNCardPreview() {
         nCardMedia = NCardMedia.IMAGE,
         hasIcon = true,
         hasTitle = true,
-        hasSubtitle = true
+        hasSubtitle = true,
+        isClickable = true
     )
 }
