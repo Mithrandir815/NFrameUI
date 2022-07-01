@@ -62,6 +62,6 @@ private fun PreviewNFrameDisplay() {
         nBGMedia = NBGMedia.MOVIE,
         nFrameHeaderCard = NFrameHeaderCard.PRESENT,
         nFrameHeaderFixed = NFrameHeaderFixed.MOVE,
-        content = listOf("test", "test1", "test2", "test3")
+        content = List(10) { "test$it" }
     )
 }
