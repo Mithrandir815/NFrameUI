@@ -32,15 +32,15 @@ fun NLayoutDisplay(
     when (type) {
         NLayoutType.FLOW -> {
             Row(modifier = Modifier.fillMaxWidth()) {
-                for (i in 0..20) {
-                    DisplayBox(index = i)
+                repeat(20) {
+                    DisplayBox(index = it + 1)
                 }
             }
         }
         NLayoutType.SLIDER -> {
             Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-                for (i in 0..20) {
-                    DisplayBox(index = i)
+                repeat(20) {
+                    DisplayBox(index = it + 1)
                 }
             }
         }
