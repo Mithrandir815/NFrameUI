@@ -8,11 +8,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nico.ed.nnn.zane.nframe.R
 import nico.ed.nnn.zane.nframe.data.NBGMedia
 import nico.ed.nnn.zane.nframe.data.NFrameHeader
 import nico.ed.nnn.zane.nframe.data.NFrameHeaderCard
+import nico.ed.nnn.zane.nframe.data.NFrameHeaderFixed
+import nico.ed.nnn.zane.nframe.ui.compose.organisms.NFrameDisplay
 import nico.ed.nnn.zane.nframe.ui.compose.organisms.NFrameExoPlayer
 
 @Composable
@@ -76,3 +79,14 @@ fun NFrameBox(
         }
     }
 }
+
+@Preview
+@Composable
+private fun PreviewNFrameBox() {
+    NFrameBox(
+        nFrameHeader = NFrameHeader.PRESENT,
+        nBGMedia = NBGMedia.MOVIE,
+        nFrameHeaderCard = NFrameHeaderCard.PRESENT
+    )
+}
+
