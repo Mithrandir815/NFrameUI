@@ -68,7 +68,7 @@ fun NFrame() {
                 nBGMedia = nBGMediaSelected,
                 nFrameHeaderCard = nFrameHeaderCardSelected,
                 nFrameHeaderFixed = nFrameHeaderFixedSelected,
-                content = listOf("test", "test1", "test2", "test3")
+                content = List(10) { "test$it" }
             )
         } else {
             Column(
