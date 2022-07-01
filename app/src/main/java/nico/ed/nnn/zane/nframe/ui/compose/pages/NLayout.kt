@@ -40,21 +40,28 @@ fun NLayout() {
              * Type の設定
              */
             var typeSelected by remember { mutableStateOf(NLayoutType.FLOW) }
+            var directionSelected by remember { mutableStateOf(NLayoutDirection.ROW) }
             Text(text = "設定項目", fontSize = 18.sp, modifier = Modifier.padding(bottom = 12.dp))
             Text(text = "Type", modifier = Modifier.padding(bottom = 12.dp))
             SelectionMenu(
                 options = NLayoutType.values().toList(),
                 selectedValue = typeSelected.toString(),
-                selectOption = { typeSelected = it }
+                selectOption = {
+                    typeSelected = it
+                    // Slider の場合は必ず横方向になる
+                    if (it == NLayoutType.SLIDER) directionSelected = NLayoutDirection.COLUMN
+                }
             )
 
             /**
              * Direction の設定
              */
-            var directionSelected by remember { mutableStateOf(NLayoutDirection.ROW) }
             Text(text = "Direction", modifier = Modifier.padding(vertical = 12.dp))
             SelectionMenu(
-                options = NLayoutDirection.values().toList(),
+                options = NLayoutDirection.values()
+                    // Slider の場合は横方向のみが選択できるようにする
+                    .filter { if (typeSelected == NLayoutType.SLIDER) it == NLayoutDirection.COLUMN else true }
+                    .toList(),
                 selectedValue = directionSelected.toString(),
                 selectOption = { directionSelected = it }
             )
