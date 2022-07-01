@@ -21,6 +21,7 @@ import nico.ed.nnn.zane.nframe.data.NLayoutType
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.NFrameTopAppBar
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.SelectionMenu
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.SliderMenu
+import nico.ed.nnn.zane.nframe.ui.compose.organisms.NLayoutDisplay
 
 @Preview
 @Composable
@@ -176,6 +177,28 @@ fun NLayout() {
                 options = listOf(0, 1, 2, 3, 4),
                 selectedValue = (itemSpacing / 4).toString(),
                 selectOption = { itemSpacing = it * 4 }
+            )
+
+            /**
+             * 表示の確認
+             */
+            Text(
+                text = "表示確認",
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
+
+            NLayoutDisplay(
+                type = typeSelected,
+                direction = NLayoutDirection.ROW,
+                line = 0,
+                itemWrap = 0,
+                itemAlign = NLayoutItemAlign.START,
+                topEdgeSpacing = 0,
+                leftEdgeSpacing = 0,
+                rightEdgeSpacing = 0,
+                bottomEdgeSpacing = 0,
+                lineSpacing = 0,
+                itemSpacing = 0
             )
         }
     }
