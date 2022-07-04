@@ -31,9 +31,20 @@ fun NLayoutDisplay(
 ) {
     when (type) {
         NLayoutType.FLOW -> {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                repeat(20) {
-                    DisplayBox(index = it + 1)
+            when (direction) {
+                NLayoutDirection.ROW -> {
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        repeat(20) {
+                            DisplayBox(index = it + 1)
+                        }
+                    }
+                }
+                NLayoutDirection.COLUMN -> {
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        repeat(20) {
+                            DisplayBox(index = it + 1)
+                        }
+                    }
                 }
             }
         }

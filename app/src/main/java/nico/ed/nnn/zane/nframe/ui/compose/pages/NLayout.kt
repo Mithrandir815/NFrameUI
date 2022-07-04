@@ -189,7 +189,7 @@ fun NLayout() {
 
             NLayoutDisplay(
                 type = typeSelected,
-                direction = NLayoutDirection.ROW,
+                direction = directionSelected,
                 line = 0,
                 itemWrap = 0,
                 itemAlign = NLayoutItemAlign.START,
