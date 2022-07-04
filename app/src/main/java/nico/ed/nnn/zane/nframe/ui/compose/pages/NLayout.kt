@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Slider
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,7 +21,6 @@ import nico.ed.nnn.zane.nframe.data.NLayoutItemAlign
 import nico.ed.nnn.zane.nframe.data.NLayoutType
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.NFrameTopAppBar
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.SelectionMenu
-import nico.ed.nnn.zane.nframe.ui.compose.atoms.SliderMenu
 import nico.ed.nnn.zane.nframe.ui.compose.organisms.NLayoutDisplay
 
 @Preview
@@ -70,32 +70,36 @@ fun NLayout() {
             /**
              * Line の設定
              */
-            var line by remember { mutableStateOf(0f) }
+            var line by remember { mutableStateOf(1f) }
             Text(
                 text = "Line（Item Wrapが0であれば無効）",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(text = line.toInt().toString(), Modifier.width(20.dp))
-                SliderMenu(
+                Slider(
                     value = line,
-                    onValueChange = { line = it }
+                    onValueChange = { line = it },
+                    valueRange = 0f..5f,
+                    steps = 4
                 )
             }
 
             /**
              * Item Wrap の設定
              */
-            var itemWrap by remember { mutableStateOf(0f) }
+            var itemWrap by remember { mutableStateOf(1f) }
             Text(
                 text = "Item Wrap",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(text = itemWrap.toInt().toString(), Modifier.width(20.dp))
-                SliderMenu(
+                Slider(
                     value = itemWrap,
-                    onValueChange = { itemWrap = it }
+                    onValueChange = { itemWrap = it },
+                    valueRange = 0f..4f,
+                    steps = 3
                 )
             }
 
@@ -190,8 +194,8 @@ fun NLayout() {
             NLayoutDisplay(
                 type = typeSelected,
                 direction = directionSelected,
-                line = 0,
-                itemWrap = 0,
+                line = line.toInt(),
+                itemWrap = itemWrap.toInt(),
                 itemAlign = NLayoutItemAlign.START,
                 topEdgeSpacing = 0,
                 leftEdgeSpacing = 0,
