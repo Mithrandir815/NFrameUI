@@ -179,6 +179,7 @@ fun NCard() {
                 hasSubtitle = subtitle == PresentAbsent.PRESENT,
                 isClickable = clickable == PresentAbsent.PRESENT,
                 hasMenu = menu == PresentAbsent.PRESENT,
+                hasNCardFoot = nCardFoot == PresentAbsent.PRESENT,
                 onMoreVertClick = {
                     coroutineScope.launch {
                         if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {

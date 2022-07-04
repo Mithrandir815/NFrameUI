@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -48,6 +49,7 @@ fun NCardPreview(
     hasSubtitle: Boolean,
     isClickable: Boolean,
     hasMenu: Boolean,
+    hasNCardFoot: Boolean,
     onMoreVertClick: () -> Unit
 ) {
     var isDialogVisible by remember { mutableStateOf(false) }
@@ -189,6 +191,11 @@ fun NCardPreview(
                     )
                 }
             }
+
+            if (hasNCardFoot) {
+                Divider()
+                NCardFoot()
+            }
         }
 
         if (isDialogVisible) {
@@ -209,6 +216,7 @@ private fun PreviewNCardPreview() {
         hasSubtitle = true,
         isClickable = true,
         hasMenu = true,
+        hasNCardFoot = true,
         onMoreVertClick = {}
     )
 }
