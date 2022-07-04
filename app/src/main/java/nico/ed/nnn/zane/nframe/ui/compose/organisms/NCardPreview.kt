@@ -56,9 +56,8 @@ fun NCardPreview(
         modifier = Modifier
             .padding(bottom = 2.dp) // Card の下端に padding で隙間を作らないと、Card の影が表示されない。
             .width(316.dp)
-            .height(220.dp)
     ) {
-        Column(Modifier.fillMaxSize()) {
+        Column(Modifier.fillMaxWidth()) {
             Box(
                 Modifier
                     .fillMaxWidth()
@@ -84,7 +83,9 @@ fun NCardPreview(
             }
 
             Row(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 ConstraintLayout(

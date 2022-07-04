@@ -59,46 +59,46 @@ fun NCard() {
             /**
              * NCardMedia の設定
              */
-            var nCardMediaSelected by remember { mutableStateOf(NCardMedia.IMAGE) }
+            var nCardMedia by remember { mutableStateOf(NCardMedia.IMAGE) }
             Text(text = "NCardMedia", modifier = Modifier.padding(vertical = 12.dp))
             SelectionMenu(
                 options = NCardMedia.values().toList(),
-                selectedValue = nCardMediaSelected.toString(),
+                selectedValue = nCardMedia.toString(),
                 selectOption = {
-                    nCardMediaSelected = it
+                    nCardMedia = it
                 }
             )
 
             /**
              * アイコンの設定
              */
-            var iconSelected by remember { mutableStateOf(PresentAbsent.PRESENT) }
+            var icon by remember { mutableStateOf(PresentAbsent.PRESENT) }
             Text(
                 text = "NCardHead - アイコン",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             SelectionMenu(
                 options = PresentAbsent.values().toList(),
-                selectedValue = iconSelected.toString(),
-                selectOption = { iconSelected = it }
+                selectedValue = icon.toString(),
+                selectOption = { icon = it }
             )
 
             /**
              * タイトルの設定
              */
-            var titleSelected by remember { mutableStateOf(PresentAbsent.PRESENT) }
-            var subtitleSelected by remember { mutableStateOf(PresentAbsent.PRESENT) }
+            var title by remember { mutableStateOf(PresentAbsent.PRESENT) }
+            var subtitle by remember { mutableStateOf(PresentAbsent.PRESENT) }
             Text(
                 text = "NCardHead - タイトル",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             SelectionMenu(
                 options = PresentAbsent.values().toList(),
-                selectedValue = titleSelected.toString(),
+                selectedValue = title.toString(),
                 selectOption = {
-                    titleSelected = it
+                    title = it
                     // タイトルに「なし」を選択した場合は、サブタイトルも「なし」を選択する。
-                    if (it == PresentAbsent.ABSENT) subtitleSelected = PresentAbsent.ABSENT
+                    if (it == PresentAbsent.ABSENT) subtitle = PresentAbsent.ABSENT
                 }
             )
 
@@ -111,59 +111,59 @@ fun NCard() {
             )
             SelectionMenu(
                 // タイトルに「なし」を選択した場合は、サブタイトルの選択肢も「なし」のみにする。
-                options = if (titleSelected == PresentAbsent.PRESENT) {
+                options = if (title == PresentAbsent.PRESENT) {
                     PresentAbsent.values().toList()
                 } else {
                     listOf(PresentAbsent.ABSENT)
                 },
-                selectedValue = subtitleSelected.toString(),
+                selectedValue = subtitle.toString(),
                 selectOption = {
-                    subtitleSelected = it
+                    subtitle = it
                 }
             )
 
             /**
              * Clickable の設定
              */
-            var clickableSelected by remember { mutableStateOf(PresentAbsent.PRESENT) }
+            var clickable by remember { mutableStateOf(PresentAbsent.PRESENT) }
             Text(
                 text = "NCardHead - Clickable",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             SelectionMenu(
                 options = PresentAbsent.values().toList(),
-                selectedValue = clickableSelected.toString(),
+                selectedValue = clickable.toString(),
                 selectOption = {
-                    clickableSelected = it
+                    clickable = it
                 }
             )
 
             /**
              * メニューの設定
              */
-            var menuSelected by remember { mutableStateOf(PresentAbsent.PRESENT) }
+            var menu by remember { mutableStateOf(PresentAbsent.PRESENT) }
             Text(
                 text = "NCardHead - メニュー",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             SelectionMenu(
                 options = PresentAbsent.values().toList(),
-                selectedValue = menuSelected.toString(),
-                selectOption = { menuSelected = it }
+                selectedValue = menu.toString(),
+                selectOption = { menu = it }
             )
 
             /**
              * NCardFoot の設定
              */
-            var nCardFootSelected by remember { mutableStateOf(PresentAbsent.PRESENT) }
+            var nCardFoot by remember { mutableStateOf(PresentAbsent.PRESENT) }
             Text(
                 text = "NCardFoot",
                 modifier = Modifier.padding(vertical = 12.dp)
             )
             SelectionMenu(
                 options = PresentAbsent.values().toList(),
-                selectedValue = nCardFootSelected.toString(),
-                selectOption = { nCardFootSelected = it }
+                selectedValue = nCardFoot.toString(),
+                selectOption = { nCardFoot = it }
             )
 
             Text(
@@ -173,12 +173,12 @@ fun NCard() {
             )
 
             NCardPreview(
-                nCardMedia = nCardMediaSelected,
-                hasIcon = iconSelected == PresentAbsent.PRESENT,
-                hasTitle = titleSelected == PresentAbsent.PRESENT,
-                hasSubtitle = subtitleSelected == PresentAbsent.PRESENT,
-                isClickable = clickableSelected == PresentAbsent.PRESENT,
-                hasMenu = menuSelected == PresentAbsent.PRESENT,
+                nCardMedia = nCardMedia,
+                hasIcon = icon == PresentAbsent.PRESENT,
+                hasTitle = title == PresentAbsent.PRESENT,
+                hasSubtitle = subtitle == PresentAbsent.PRESENT,
+                isClickable = clickable == PresentAbsent.PRESENT,
+                hasMenu = menu == PresentAbsent.PRESENT,
                 onMoreVertClick = {
                     coroutineScope.launch {
                         if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
