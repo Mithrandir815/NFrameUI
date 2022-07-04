@@ -4,31 +4,49 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Scaffold
+import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.material.BottomSheetState
+import androidx.compose.material.BottomSheetValue
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
+import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 import nico.ed.nnn.zane.nframe.R
 import nico.ed.nnn.zane.nframe.data.NCardMedia
 import nico.ed.nnn.zane.nframe.data.PresentAbsent
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.NFrameTopAppBar
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.SelectionMenu
+import nico.ed.nnn.zane.nframe.ui.compose.organisms.NCardBottomSheet
 import nico.ed.nnn.zane.nframe.ui.compose.organisms.NCardPreview
 
+@OptIn(ExperimentalMaterialApi::class)
 @Preview
 @Composable
 fun NCard() {
-    Scaffold(
+    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
+        bottomSheetState = BottomSheetState(BottomSheetValue.Collapsed)
+    )
+    val coroutineScope = rememberCoroutineScope()
+
+    BottomSheetScaffold(
+        sheetContent = {
+            NCardBottomSheet()
+        },
+        scaffoldState = bottomSheetScaffoldState,
         topBar = {
             NFrameTopAppBar(R.string.n_card)
-        }
+        },
+        sheetPeekHeight = 0.dp // 閉じたボトムシートは完全に隠す。
     ) { padding ->
         Column(
             modifier = Modifier
@@ -160,7 +178,16 @@ fun NCard() {
                 hasTitle = titleSelected == PresentAbsent.PRESENT,
                 hasSubtitle = subtitleSelected == PresentAbsent.PRESENT,
                 isClickable = clickableSelected == PresentAbsent.PRESENT,
-                hasMenu = menuSelected == PresentAbsent.PRESENT
+                hasMenu = menuSelected == PresentAbsent.PRESENT,
+                onMoreVertClick = {
+                    coroutineScope.launch {
+                        if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
+                            bottomSheetScaffoldState.bottomSheetState.expand()
+                        } else {
+                            bottomSheetScaffoldState.bottomSheetState.collapse()
+                        }
+                    }
+                }
             )
         }
     }

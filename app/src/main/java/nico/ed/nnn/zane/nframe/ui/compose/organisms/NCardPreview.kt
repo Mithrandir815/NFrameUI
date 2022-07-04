@@ -47,7 +47,8 @@ fun NCardPreview(
     hasTitle: Boolean,
     hasSubtitle: Boolean,
     isClickable: Boolean,
-    hasMenu: Boolean
+    hasMenu: Boolean,
+    onMoreVertClick: () -> Unit
 ) {
     var isDialogVisible by remember { mutableStateOf(false) }
 
@@ -180,7 +181,9 @@ fun NCardPreview(
                     Icon(
                         imageVector = Icons.Default.MoreVert,
                         contentDescription = null,
-                        modifier = Modifier.padding(horizontal = 8.dp),
+                        modifier = Modifier
+                            .padding(horizontal = 8.dp)
+                            .clickable(onClick = onMoreVertClick),
                         tint = Gray500
                     )
                 }
@@ -204,6 +207,7 @@ private fun PreviewNCardPreview() {
         hasTitle = true,
         hasSubtitle = true,
         isClickable = true,
-        hasMenu = true
+        hasMenu = true,
+        onMoreVertClick = {}
     )
 }
