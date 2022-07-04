@@ -46,7 +46,7 @@ fun NLayoutDisplay(
                 NLayoutDirection.COLUMN -> {
                     Row(modifier = Modifier.fillMaxWidth()) {
                         repeat(line) { lineNum ->
-                            Column(modifier = Modifier.fillMaxWidth()) {
+                            Column {
                                 repeat(itemWrap) {
                                     DisplayBox(index = itemWrap * lineNum + it + 1)
                                 }

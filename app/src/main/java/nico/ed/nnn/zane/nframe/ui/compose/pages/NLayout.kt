@@ -98,8 +98,8 @@ fun NLayout() {
                 Slider(
                     value = itemWrap,
                     onValueChange = { itemWrap = it },
-                    valueRange = 0f..4f,
-                    steps = 3
+                    valueRange = 0f..5f,
+                    steps = 4
                 )
             }
 
