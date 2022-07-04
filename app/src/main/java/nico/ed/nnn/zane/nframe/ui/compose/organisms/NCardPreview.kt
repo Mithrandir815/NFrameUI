@@ -77,7 +77,6 @@ fun NCardPreview(
                             .fillMaxSize()
                     )
                     NCardMedia.MOVIE -> NFrameExoPlayer(
-                        modifier = Modifier.fillMaxSize(),
                         uri = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                     )
                     NCardMedia.NONE -> {}

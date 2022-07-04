@@ -2,7 +2,11 @@ package nico.ed.nnn.zane.nframe.ui.compose.atoms
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,8 +18,6 @@ import nico.ed.nnn.zane.nframe.R
 import nico.ed.nnn.zane.nframe.data.NBGMedia
 import nico.ed.nnn.zane.nframe.data.NFrameHeader
 import nico.ed.nnn.zane.nframe.data.NFrameHeaderCard
-import nico.ed.nnn.zane.nframe.data.NFrameHeaderFixed
-import nico.ed.nnn.zane.nframe.ui.compose.organisms.NFrameDisplay
 import nico.ed.nnn.zane.nframe.ui.compose.organisms.NFrameExoPlayer
 
 @Composable
@@ -41,7 +43,6 @@ fun NFrameBox(
             when (nBGMedia) {
                 NBGMedia.MOVIE -> {
                     NFrameExoPlayer(
-                        modifier = Modifier,
                         uri = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                     )
                 }
@@ -89,4 +90,3 @@ private fun PreviewNFrameBox() {
         nFrameHeaderCard = NFrameHeaderCard.PRESENT
     )
 }
-
