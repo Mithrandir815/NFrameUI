@@ -24,8 +24,11 @@ fun NFrameExoPlayer(
                 styledPlayerView = this
                 player = ExoPlayer.Builder(it).build().apply {
                     setMediaItem(MediaItem.fromUri(uri))
+                    playWhenReady = true // 自動再生に必要
+                    prepare() // 自動再生に必要
                 }
                 resizeMode = RESIZE_MODE_FILL
+                useController = false
             }
         }
     )
