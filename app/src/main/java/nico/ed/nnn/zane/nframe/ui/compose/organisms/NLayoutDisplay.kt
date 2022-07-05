@@ -19,6 +19,7 @@ import nico.ed.nnn.zane.nframe.data.NLayoutType
 fun NLayoutDisplay(
     type: NLayoutType,
     direction: NLayoutDirection,
+    itemCount: Int,
     line: Int,
     itemWrap: Int,
     itemAlign: NLayoutItemAlign,

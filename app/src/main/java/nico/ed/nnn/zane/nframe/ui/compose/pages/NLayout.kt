@@ -68,6 +68,23 @@ fun NLayout() {
             )
 
             /**
+             * アイテム数の設定
+             */
+            var itemCount by remember { mutableStateOf(0f) }
+            Text(
+                text = "アイテム数",
+                modifier = Modifier.padding(vertical = 12.dp)
+            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(text = itemCount.toInt().toString(), Modifier.width(20.dp))
+                Slider(
+                    value = itemCount,
+                    onValueChange = { itemCount = it },
+                    valueRange = 0f..20f
+                )
+            }
+
+            /**
              * Line の設定
              */
             var line by remember { mutableStateOf(1f) }
@@ -194,6 +211,7 @@ fun NLayout() {
             NLayoutDisplay(
                 type = typeSelected,
                 direction = directionSelected,
+                itemCount = itemCount.toInt(),
                 line = line.toInt(),
                 itemWrap = itemWrap.toInt(),
                 itemAlign = NLayoutItemAlign.START,
