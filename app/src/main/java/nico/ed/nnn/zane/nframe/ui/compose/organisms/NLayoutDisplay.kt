@@ -33,16 +33,24 @@ fun NLayoutDisplay(
         NLayoutType.FLOW -> {
             when (direction) {
                 NLayoutDirection.ROW -> {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        repeat(20) {
-                            DisplayBox(index = it + 1)
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        repeat(line) { lineNum ->
+                            Row(modifier = Modifier.fillMaxWidth()) {
+                                repeat(itemWrap) {
+                                    DisplayBox(index = itemWrap * lineNum + it + 1)
+                                }
+                            }
                         }
                     }
                 }
                 NLayoutDirection.COLUMN -> {
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        repeat(20) {
-                            DisplayBox(index = it + 1)
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        repeat(line) { lineNum ->
+                            Column {
+                                repeat(itemWrap) {
+                                    DisplayBox(index = itemWrap * lineNum + it + 1)
+                                }
+                            }
                         }
                     }
                 }
