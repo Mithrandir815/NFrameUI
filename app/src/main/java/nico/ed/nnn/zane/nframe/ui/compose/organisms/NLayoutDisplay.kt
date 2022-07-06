@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import nico.ed.nnn.zane.nframe.data.NLayoutDirection
 import nico.ed.nnn.zane.nframe.data.NLayoutItemAlign
 import nico.ed.nnn.zane.nframe.data.NLayoutType
+import kotlin.math.min
 
 @Composable
 fun NLayoutDisplay(
@@ -34,11 +35,23 @@ fun NLayoutDisplay(
         NLayoutType.FLOW -> {
             when (direction) {
                 NLayoutDirection.ROW -> {
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        repeat(line) { lineNum ->
-                            Row(modifier = Modifier.fillMaxWidth()) {
-                                repeat(itemWrap) {
-                                    DisplayBox(index = itemWrap * lineNum + it + 1)
+                    // itemWrap が 0 のときは改行せずそのまま並べる
+                    if (itemWrap == 0) {
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            repeat(itemCount) {
+                                DisplayBox(index = it + 1)
+                            }
+                        }
+                    }
+                    // ItemWrap が 1 以上のときは改行する
+                    else {
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            val lineNum = min(itemCount / itemWrap + 1, line)
+                            repeat(lineNum) { lineIndex ->
+                                Row(modifier = Modifier.fillMaxWidth()) {
+                                    repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
+                                        DisplayBox(index = itemWrap * lineIndex + it + 1)
+                                    }
                                 }
                             }
                         }
