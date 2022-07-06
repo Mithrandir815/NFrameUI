@@ -70,7 +70,7 @@ fun NLayout() {
             /**
              * アイテム数の設定
              */
-            var itemCount by remember { mutableStateOf(0f) }
+            var itemCount by remember { mutableStateOf(1f) }
             Text(
                 text = "アイテム数",
                 modifier = Modifier.padding(vertical = 12.dp)
@@ -80,7 +80,7 @@ fun NLayout() {
                 Slider(
                     value = itemCount,
                     onValueChange = { itemCount = it },
-                    valueRange = 0f..20f
+                    valueRange = 1f..20f
                 )
             }
 
