@@ -35,12 +35,23 @@ fun NLayoutDisplay(
         NLayoutType.FLOW -> {
             when (direction) {
                 NLayoutDirection.ROW -> {
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        val lineNum = min(itemCount / itemWrap, line - 1)
-                        for (i in 0..lineNum) {
-                            Row(modifier = Modifier.fillMaxWidth()) {
-                                repeat(min(itemCount - itemWrap * i, itemWrap)) {
-                                    DisplayBox(index = itemWrap * i + it + 1)
+                    // itemWrap が 0 のときは改行せずそのまま並べる
+                    if (itemWrap == 0) {
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            repeat(itemCount) {
+                                DisplayBox(index = it + 1)
+                            }
+                        }
+                    }
+                    // ItemWrap が 1 以上のときは改行する
+                    else {
+                        Column(modifier = Modifier.fillMaxWidth()) {
+                            val lineNum = min(itemCount / itemWrap, line - 1)
+                            for (i in 0..lineNum) {
+                                Row(modifier = Modifier.fillMaxWidth()) {
+                                    repeat(min(itemCount - itemWrap * i, itemWrap)) {
+                                        DisplayBox(index = itemWrap * i + it + 1)
+                                    }
                                 }
                             }
                         }
