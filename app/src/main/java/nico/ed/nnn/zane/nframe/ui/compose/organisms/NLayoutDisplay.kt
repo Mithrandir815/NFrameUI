@@ -46,11 +46,11 @@ fun NLayoutDisplay(
                     // ItemWrap が 1 以上のときは改行する
                     else {
                         Column(modifier = Modifier.fillMaxWidth()) {
-                            val lineNum = min(itemCount / itemWrap, line - 1)
-                            for (i in 0..lineNum) {
+                            val lineNum = min(itemCount / itemWrap + 1, line)
+                            repeat(lineNum) { lineIndex ->
                                 Row(modifier = Modifier.fillMaxWidth()) {
-                                    repeat(min(itemCount - itemWrap * i, itemWrap)) {
-                                        DisplayBox(index = itemWrap * i + it + 1)
+                                    repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
+                                        DisplayBox(index = itemWrap * lineIndex + it + 1)
                                     }
                                 }
                             }
