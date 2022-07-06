@@ -24,7 +24,9 @@ import nico.ed.nnn.zane.nframe.ui.compose.organisms.NFrameExoPlayer
 fun NFrameBox(
     nFrameHeader: NFrameHeader,
     nBGMedia: NBGMedia,
-    nFrameHeaderCard: NFrameHeaderCard
+    nFrameHeaderCard: NFrameHeaderCard,
+    positionMs: Long,
+    onPositionChange: (Long) -> Unit
 ) {
     if (nFrameHeader == NFrameHeader.PRESENT) {
         Box(
@@ -43,7 +45,9 @@ fun NFrameBox(
             when (nBGMedia) {
                 NBGMedia.MOVIE -> {
                     NFrameExoPlayer(
-                        uri = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                        uri = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                        positionMs = positionMs,
+                        onPositionChange = onPositionChange,
                     )
                 }
                 NBGMedia.IMAGE -> Box(
@@ -87,6 +91,8 @@ private fun PreviewNFrameBox() {
     NFrameBox(
         nFrameHeader = NFrameHeader.PRESENT,
         nBGMedia = NBGMedia.MOVIE,
-        nFrameHeaderCard = NFrameHeaderCard.PRESENT
+        nFrameHeaderCard = NFrameHeaderCard.PRESENT,
+        positionMs = 0,
+        onPositionChange = {},
     )
 }

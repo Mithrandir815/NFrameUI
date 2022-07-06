@@ -1,7 +1,11 @@
 package nico.ed.nnn.zane.nframe.ui.compose.organisms
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -21,6 +25,8 @@ fun NFrameDisplay(
     nBGMedia: NBGMedia,
     nFrameHeaderCard: NFrameHeaderCard,
     nFrameHeaderFixed: NFrameHeaderFixed,
+    positionMs: Long,
+    onPositionChange: (Long) -> Unit,
     content: List<String>
 ) {
     Column {
@@ -28,7 +34,9 @@ fun NFrameDisplay(
             NFrameBox(
                 nFrameHeader,
                 nBGMedia,
-                nFrameHeaderCard
+                nFrameHeaderCard,
+                positionMs,
+                onPositionChange
             )
         }
         LazyColumn {
@@ -37,7 +45,9 @@ fun NFrameDisplay(
                     NFrameBox(
                         nFrameHeader,
                         nBGMedia,
-                        nFrameHeaderCard
+                        nFrameHeaderCard,
+                        positionMs,
+                        onPositionChange
                     )
                 }
             }
@@ -62,6 +72,8 @@ private fun PreviewNFrameDisplay() {
         nBGMedia = NBGMedia.MOVIE,
         nFrameHeaderCard = NFrameHeaderCard.PRESENT,
         nFrameHeaderFixed = NFrameHeaderFixed.MOVE,
+        positionMs = 0,
+        onPositionChange = {},
         content = List(10) { "test$it" }
     )
 }
