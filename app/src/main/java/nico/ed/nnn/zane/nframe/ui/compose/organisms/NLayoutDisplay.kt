@@ -46,7 +46,10 @@ fun NLayoutDisplay(
                     // ItemWrap が 1 以上のときは改行する
                     else {
                         Column(modifier = Modifier.fillMaxWidth()) {
-                            val lineNum = min(itemCount / itemWrap + 1, line)
+                            val lineNum =
+                                // Line が 0 のときは行数制限がない
+                                if (line == 0) itemCount / itemWrap + 1
+                                else min(itemCount / itemWrap + 1, line)
                             repeat(lineNum) { lineIndex ->
                                 Row(modifier = Modifier.fillMaxWidth()) {
                                     repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
