@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import nico.ed.nnn.zane.nframe.data.NLayoutDirection
 import nico.ed.nnn.zane.nframe.data.NLayoutItemAlign
 import nico.ed.nnn.zane.nframe.data.NLayoutType
+import kotlin.math.ceil
 import kotlin.math.min
 
 @Composable
@@ -31,6 +32,10 @@ fun NLayoutDisplay(
     lineSpacing: Int,
     itemSpacing: Int
 ) {
+    val maxLinesByItem =
+        if (itemWrap == 0) 1
+        else ceil(itemCount.toDouble() / itemWrap.toDouble()).toInt()
+
     when (type) {
         NLayoutType.FLOW -> {
             when (direction) {
@@ -48,8 +53,8 @@ fun NLayoutDisplay(
                         Column(modifier = Modifier.fillMaxWidth()) {
                             val lineNum =
                                 // Line が 0 のときは行数制限がない
-                                if (line == 0) itemCount / itemWrap + 1
-                                else min(itemCount / itemWrap + 1, line)
+                                if (line == 0) maxLinesByItem
+                                else min(maxLinesByItem, line)
                             repeat(lineNum) { lineIndex ->
                                 Row(modifier = Modifier.fillMaxWidth()) {
                                     repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
@@ -74,8 +79,8 @@ fun NLayoutDisplay(
                         Row {
                             val lineNum =
                                 // Line が 0 のときは行数制限がない
-                                if (line == 0) itemCount / itemWrap + 1
-                                else min(itemCount / itemWrap + 1, line)
+                                if (line == 0) maxLinesByItem
+                                else min(maxLinesByItem, line)
                             repeat(lineNum) { lineIndex ->
                                 Column {
                                     repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
@@ -89,9 +94,33 @@ fun NLayoutDisplay(
             }
         }
         NLayoutType.SLIDER -> {
-            Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-                repeat(20) {
-                    DisplayBox(index = it + 1)
+            // itemWrap が 0 のときは改行せずそのまま並べる
+            if (itemWrap == 0) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                ) {
+                    repeat(itemCount) {
+                        DisplayBox(index = it + 1)
+                    }
+                }
+            }
+            // ItemWrap が 1 以上のときは改行する
+            else {
+                Column {
+                    val lineNum =
+                        // Line が 0 のときは行数制限がない
+                        if (line == 0) maxLinesByItem
+                        else min(maxLinesByItem, line)
+
+                    repeat(lineNum) { lineIndex ->
+                        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
+                            repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
+                                DisplayBox(index = itemWrap * lineIndex + it + 1)
+                            }
+                        }
+                    }
                 }
             }
         }
