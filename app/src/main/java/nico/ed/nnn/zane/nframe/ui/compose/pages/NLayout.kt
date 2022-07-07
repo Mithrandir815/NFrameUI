@@ -37,45 +37,55 @@ fun NLayout() {
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            /**
-             * Type の設定
-             */
             var typeSelected by remember { mutableStateOf(NLayoutType.FLOW) }
             var directionSelected by remember { mutableStateOf(NLayoutDirection.ROW) }
-            Text(text = "設定項目", fontSize = 18.sp, modifier = Modifier.padding(bottom = 12.dp))
-            Text(text = "Type", modifier = Modifier.padding(bottom = 12.dp))
-            SelectionMenu(
-                options = NLayoutType.values().toList(),
-                selectedValue = typeSelected.toString(),
-                selectOption = {
-                    typeSelected = it
-                    // Slider の場合は必ず横方向になる
-                    if (it == NLayoutType.SLIDER) directionSelected = NLayoutDirection.COLUMN
-                }
-            )
 
-            /**
-             * Direction の設定
-             */
-            Text(text = "Direction", modifier = Modifier.padding(vertical = 12.dp))
-            SelectionMenu(
-                options = NLayoutDirection.values()
-                    // Slider の場合は横方向のみが選択できるようにする
-                    .filter { typeSelected == NLayoutType.FLOW || it == NLayoutDirection.COLUMN }
-                    .toList(),
-                selectedValue = directionSelected.toString(),
-                selectOption = { directionSelected = it }
-            )
+            Text(text = "設定項目", fontSize = 18.sp, modifier = Modifier.padding(bottom = 12.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 12.dp)
+            ) {
+                /**
+                 * Type の設定
+                 */
+                SelectionMenu(
+                    options = NLayoutType.values().toList(),
+                    selectedValue = typeSelected.toString(),
+                    selectOption = {
+                        typeSelected = it
+                        // Slider の場合は必ず横方向になる
+                        if (it == NLayoutType.SLIDER) directionSelected = NLayoutDirection.COLUMN
+                    },
+                    label = "Type",
+                    modifier = Modifier
+                        .width(180.dp)
+                        .padding(end = 12.dp)
+                )
+
+                /**
+                 * Direction の設定
+                 */
+                SelectionMenu(
+                    options = NLayoutDirection.values()
+                        // Slider の場合は横方向のみが選択できるようにする
+                        .filter { typeSelected == NLayoutType.FLOW || it == NLayoutDirection.COLUMN }
+                        .toList(),
+                    selectedValue = directionSelected.toString(),
+                    selectOption = { directionSelected = it },
+                    label = "Direction",
+                    modifier = Modifier.width(180.dp)
+                )
+            }
 
             /**
              * アイテム数の設定
              */
             var itemCount by remember { mutableStateOf(1f) }
-            Text(
-                text = "アイテム数",
-                modifier = Modifier.padding(vertical = 12.dp)
-            )
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = "アイテム数: ")
                 Text(text = itemCount.toInt().toString(), Modifier.width(20.dp))
                 Slider(
                     value = itemCount,
@@ -88,11 +98,8 @@ fun NLayout() {
              * Line の設定
              */
             var line by remember { mutableStateOf(1f) }
-            Text(
-                text = "Line（Item Wrapが0であれば無効）",
-                modifier = Modifier.padding(vertical = 12.dp)
-            )
             Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(text = "Line: ")
                 Text(text = line.toInt().toString(), Modifier.width(20.dp))
                 Slider(
                     value = line,
@@ -101,16 +108,16 @@ fun NLayout() {
                     steps = 4
                 )
             }
+            Text(text = "（Item Wrapが0であれば無効）", fontSize = 10.sp)
 
             /**
              * Item Wrap の設定
              */
             var itemWrap by remember { mutableStateOf(1f) }
-            Text(
-                text = "Item Wrap",
-                modifier = Modifier.padding(vertical = 12.dp)
-            )
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(text = "Item Wrap: ")
                 Text(text = itemWrap.toInt().toString(), Modifier.width(20.dp))
                 Slider(
                     value = itemWrap,
@@ -124,11 +131,11 @@ fun NLayout() {
              * Item Align の設定
              */
             var itemAlign by remember { mutableStateOf(NLayoutItemAlign.START) }
-            Text(text = "Item Align", modifier = Modifier.padding(vertical = 12.dp))
             SelectionMenu(
                 options = NLayoutItemAlign.values().toList(),
                 selectedValue = itemAlign.toString(),
-                selectOption = { itemAlign = it }
+                selectOption = { itemAlign = it },
+                label = "Item Align"
             )
 
             /**
@@ -168,37 +175,43 @@ fun NLayout() {
                 options = listOf(0, 1, 2, 3, 4),
                 selectedValue = (bottomEdgeSpacing / 8).toString(),
                 selectOption = { bottomEdgeSpacing = it * 8 },
-                modifier = Modifier.width(120.dp),
+                modifier = Modifier
+                    .width(120.dp)
+                    .padding(bottom = 12.dp),
                 label = "bottom"
             )
 
-            /**
-             * Line Spacing の設定
-             */
             var lineSpacing by remember { mutableStateOf(0) }
-            Text(
-                text = "Line Spacing",
-                modifier = Modifier.padding(vertical = 12.dp)
-            )
-            SelectionMenu(
-                options = listOf(0, 1, 2, 3, 4),
-                selectedValue = (lineSpacing / 4).toString(),
-                selectOption = { lineSpacing = it * 4 }
-            )
-
-            /**
-             * Item Spacing の設定
-             */
             var itemSpacing by remember { mutableStateOf(0) }
-            Text(
-                text = "Item Spacing",
-                modifier = Modifier.padding(vertical = 12.dp)
-            )
-            SelectionMenu(
-                options = listOf(0, 1, 2, 3, 4),
-                selectedValue = (itemSpacing / 4).toString(),
-                selectOption = { itemSpacing = it * 4 }
-            )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(bottom = 16.dp)
+            ) {
+                /**
+                 * Line Spacing の設定
+                 */
+
+                SelectionMenu(
+                    options = listOf(0, 1, 2, 3, 4),
+                    selectedValue = (lineSpacing / 4).toString(),
+                    selectOption = { lineSpacing = it * 4 },
+                    label = "Line Spacing",
+                    modifier = Modifier
+                        .width(180.dp)
+                        .padding(end = 12.dp)
+                )
+                /**
+                 * Item Spacing の設定
+                 */
+                SelectionMenu(
+                    options = listOf(0, 1, 2, 3, 4),
+                    selectedValue = (itemSpacing / 4).toString(),
+                    selectOption = { itemSpacing = it * 4 },
+                    label = "Item Spacing",
+                    modifier = Modifier.width(180.dp)
+                )
+            }
 
             /**
              * 表示の確認
