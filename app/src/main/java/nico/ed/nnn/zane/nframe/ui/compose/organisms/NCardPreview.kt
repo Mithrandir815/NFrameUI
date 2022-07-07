@@ -50,7 +50,9 @@ fun NCardPreview(
     isClickable: Boolean,
     hasMenu: Boolean,
     hasNCardFoot: Boolean,
-    onMoreVertClick: () -> Unit
+    onMoreVertClick: () -> Unit,
+    positionMs: Long,
+    onPositionChange: (Long) -> Unit
 ) {
     var isDialogVisible by remember { mutableStateOf(false) }
 
@@ -78,8 +80,8 @@ fun NCardPreview(
                     )
                     NCardMedia.MOVIE -> NFrameExoPlayer(
                         uri = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                        positionMs = 0,
-                        onPositionChange = {}
+                        positionMs = positionMs,
+                        onPositionChange = onPositionChange
                     )
                     NCardMedia.NONE -> {}
                 }
@@ -218,6 +220,8 @@ private fun PreviewNCardPreview() {
         isClickable = true,
         hasMenu = true,
         hasNCardFoot = true,
-        onMoreVertClick = {}
+        onMoreVertClick = {},
+        positionMs = 0,
+        onPositionChange = {}
     )
 }
