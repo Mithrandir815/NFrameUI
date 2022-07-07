@@ -218,7 +218,7 @@ fun NLayout() {
              */
             Text(
                 text = "表示確認",
-                modifier = Modifier.padding(vertical = 12.dp)
+                modifier = Modifier.padding(bottom = 12.dp)
             )
 
             NLayoutDisplay(
