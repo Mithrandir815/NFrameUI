@@ -35,6 +35,17 @@ fun NLayoutDisplay(
     val maxLinesByItem =
         if (itemWrap == 0) 1
         else ceil(itemCount.toDouble() / itemWrap.toDouble()).toInt()
+    val horizontalArrangement: Arrangement.Horizontal = when (itemAlign) {
+        NLayoutItemAlign.CENTER -> Arrangement.Center
+        NLayoutItemAlign.END -> Arrangement.End
+        else -> Arrangement.Start
+    }
+    val verticalArrangement: Arrangement.Vertical = when (itemAlign) {
+        NLayoutItemAlign.CENTER -> Arrangement.Center
+        NLayoutItemAlign.END -> Arrangement.Bottom
+        else -> Arrangement.Top
+    }
+    val isStretch = itemAlign == NLayoutItemAlign.STRETCH
 
     when (type) {
         NLayoutType.FLOW -> {
@@ -42,9 +53,15 @@ fun NLayoutDisplay(
                 NLayoutDirection.ROW -> {
                     // itemWrap が 0 のときは改行せずそのまま並べる
                     if (itemWrap == 0) {
-                        Row(modifier = Modifier.fillMaxWidth()) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = horizontalArrangement
+                        ) {
                             repeat(itemCount) {
-                                DisplayBox(index = it + 1)
+                                DisplayBox(
+                                    index = it + 1,
+                                    modifier = if (isStretch) Modifier.weight(1f) else Modifier
+                                )
                             }
                         }
                     }
@@ -56,9 +73,15 @@ fun NLayoutDisplay(
                                 if (line == 0) maxLinesByItem
                                 else min(maxLinesByItem, line)
                             repeat(lineNum) { lineIndex ->
-                                Row(modifier = Modifier.fillMaxWidth()) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = horizontalArrangement
+                                ) {
                                     repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
-                                        DisplayBox(index = itemWrap * lineIndex + it + 1)
+                                        DisplayBox(
+                                            index = itemWrap * lineIndex + it + 1,
+                                            modifier = if (isStretch) Modifier.weight(1f) else Modifier
+                                        )
                                     }
                                 }
                             }
@@ -68,7 +91,7 @@ fun NLayoutDisplay(
                 NLayoutDirection.COLUMN -> {
                     // itemWrap が 0 のときは改行せずそのまま並べる
                     if (itemWrap == 0) {
-                        Column {
+                        Column(verticalArrangement = verticalArrangement) {
                             repeat(itemCount) {
                                 DisplayBox(index = it + 1)
                             }
@@ -76,15 +99,21 @@ fun NLayoutDisplay(
                     }
                     // ItemWrap が 1 以上のときは改行する
                     else {
-                        Row {
+                        Row(modifier = Modifier.height(IntrinsicSize.Max)) {
                             val lineNum =
                                 // Line が 0 のときは行数制限がない
                                 if (line == 0) maxLinesByItem
                                 else min(maxLinesByItem, line)
                             repeat(lineNum) { lineIndex ->
-                                Column {
+                                Column(
+                                    modifier = Modifier.fillMaxHeight(),
+                                    verticalArrangement = verticalArrangement
+                                ) {
                                     repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
-                                        DisplayBox(index = itemWrap * lineIndex + it + 1)
+                                        DisplayBox(
+                                            index = itemWrap * lineIndex + it + 1,
+                                            modifier = if (isStretch) Modifier.weight(1f) else Modifier
+                                        )
                                     }
                                 }
                             }
