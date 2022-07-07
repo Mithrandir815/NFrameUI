@@ -61,11 +61,26 @@ fun NLayoutDisplay(
                     }
                 }
                 NLayoutDirection.COLUMN -> {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        repeat(line) { lineNum ->
-                            Column {
-                                repeat(itemWrap) {
-                                    DisplayBox(index = itemWrap * lineNum + it + 1)
+                    // itemWrap が 0 のときは改行せずそのまま並べる
+                    if (itemWrap == 0) {
+                        Column {
+                            repeat(itemCount) {
+                                DisplayBox(index = it + 1)
+                            }
+                        }
+                    }
+                    // ItemWrap が 1 以上のときは改行する
+                    else {
+                        Row {
+                            val lineNum =
+                                // Line が 0 のときは行数制限がない
+                                if (line == 0) itemCount / itemWrap + 1
+                                else min(itemCount / itemWrap + 1, line)
+                            repeat(lineNum) { lineIndex ->
+                                Column {
+                                    repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
+                                        DisplayBox(index = itemWrap * lineIndex + it + 1)
+                                    }
                                 }
                             }
                         }
