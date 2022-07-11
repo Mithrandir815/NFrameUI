@@ -185,6 +185,10 @@ fun NLayoutDisplay(
                     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
                         repeat(itemCount) {
                             DisplayBox(index = it + 1)
+                            // アイテム間に余白を設定する
+                            if (it != itemCount) {
+                                Spacer(modifier = Modifier.width(itemSpacing.dp))
+                            }
                         }
                     }
                 }
@@ -208,8 +212,13 @@ fun NLayoutDisplay(
                         Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
                             repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
                                 DisplayBox(index = itemWrap * lineIndex + it + 1)
+                                // アイテム間に余白を設定する
+                                if (it != min(itemCount - itemWrap * lineIndex, itemWrap)) {
+                                    Spacer(modifier = Modifier.width(itemSpacing.dp))
+                                }
                             }
                         }
+                        // 行間に余白を設定する
                         Spacer(modifier = Modifier.height(lineSpacing.dp))
                     }
                 }
