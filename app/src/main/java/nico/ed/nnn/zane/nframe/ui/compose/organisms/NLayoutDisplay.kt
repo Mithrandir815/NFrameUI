@@ -54,7 +54,14 @@ fun NLayoutDisplay(
                     // itemWrap が 0 のときは改行せずそのまま並べる
                     if (itemWrap == 0) {
                         Row(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    top = topEdgeSpacing.dp,
+                                    start = leftEdgeSpacing.dp,
+                                    bottom = bottomEdgeSpacing.dp,
+                                    end = rightEdgeSpacing.dp
+                                ),
                             horizontalArrangement = horizontalArrangement
                         ) {
                             repeat(itemCount) {
@@ -74,7 +81,14 @@ fun NLayoutDisplay(
                                 else min(maxLinesByItem, line)
                             repeat(lineNum) { lineIndex ->
                                 Row(
-                                    modifier = Modifier.fillMaxWidth(),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(
+                                            top = topEdgeSpacing.dp,
+                                            start = leftEdgeSpacing.dp,
+                                            bottom = bottomEdgeSpacing.dp,
+                                            end = rightEdgeSpacing.dp
+                                        ),
                                     horizontalArrangement = horizontalArrangement
                                 ) {
                                     repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
@@ -91,7 +105,15 @@ fun NLayoutDisplay(
                 NLayoutDirection.COLUMN -> {
                     // itemWrap が 0 のときは改行せずそのまま並べる
                     if (itemWrap == 0) {
-                        Column(verticalArrangement = verticalArrangement) {
+                        Column(
+                            verticalArrangement = verticalArrangement,
+                            modifier = Modifier.padding(
+                                top = topEdgeSpacing.dp,
+                                start = leftEdgeSpacing.dp,
+                                bottom = bottomEdgeSpacing.dp,
+                                end = rightEdgeSpacing.dp
+                            )
+                        ) {
                             repeat(itemCount) {
                                 DisplayBox(index = it + 1)
                             }
@@ -99,7 +121,16 @@ fun NLayoutDisplay(
                     }
                     // ItemWrap が 1 以上のときは改行する
                     else {
-                        Row(modifier = Modifier.height(IntrinsicSize.Max)) {
+                        Row(
+                            modifier = Modifier
+                                .height(IntrinsicSize.Max)
+                                .padding(
+                                    top = topEdgeSpacing.dp,
+                                    start = leftEdgeSpacing.dp,
+                                    bottom = bottomEdgeSpacing.dp,
+                                    end = rightEdgeSpacing.dp
+                                )
+                        ) {
                             val lineNum =
                                 // Line が 0 のときは行数制限がない
                                 if (line == 0) maxLinesByItem
@@ -125,19 +156,33 @@ fun NLayoutDisplay(
         NLayoutType.SLIDER -> {
             // itemWrap が 0 のときは改行せずそのまま並べる
             if (itemWrap == 0) {
-                Row(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .horizontalScroll(rememberScrollState())
+                        .padding(
+                            top = topEdgeSpacing.dp,
+                            start = leftEdgeSpacing.dp,
+                            bottom = bottomEdgeSpacing.dp,
+                            end = rightEdgeSpacing.dp
+                        )
                 ) {
-                    repeat(itemCount) {
-                        DisplayBox(index = it + 1)
+                    Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
+                        repeat(itemCount) {
+                            DisplayBox(index = it + 1)
+                        }
                     }
                 }
             }
             // ItemWrap が 1 以上のときは改行する
             else {
-                Column {
+                Column(
+                    modifier = Modifier.padding(
+                        top = topEdgeSpacing.dp,
+                        start = leftEdgeSpacing.dp,
+                        bottom = bottomEdgeSpacing.dp,
+                        end = rightEdgeSpacing.dp
+                    )
+                ) {
                     val lineNum =
                         // Line が 0 のときは行数制限がない
                         if (line == 0) maxLinesByItem
