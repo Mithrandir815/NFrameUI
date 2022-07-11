@@ -227,7 +227,7 @@ fun NLayout() {
                 itemCount = itemCount.toInt(),
                 line = line.toInt(),
                 itemWrap = itemWrap.toInt(),
-                itemAlign = NLayoutItemAlign.START,
+                itemAlign = itemAlign,
                 topEdgeSpacing = 0,
                 leftEdgeSpacing = 0,
                 rightEdgeSpacing = 0,
