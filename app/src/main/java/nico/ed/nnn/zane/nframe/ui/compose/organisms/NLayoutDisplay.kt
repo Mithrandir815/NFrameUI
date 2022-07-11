@@ -58,9 +58,9 @@ fun NLayoutDisplay(
                                 .fillMaxWidth()
                                 .padding(
                                     top = topEdgeSpacing.dp,
-                                    start = rightEdgeSpacing.dp,
+                                    start = leftEdgeSpacing.dp,
                                     bottom = bottomEdgeSpacing.dp,
-                                    end = leftEdgeSpacing.dp
+                                    end = rightEdgeSpacing.dp
                                 ),
                             horizontalArrangement = horizontalArrangement
                         ) {
@@ -85,9 +85,9 @@ fun NLayoutDisplay(
                                         .fillMaxWidth()
                                         .padding(
                                             top = topEdgeSpacing.dp,
-                                            start = rightEdgeSpacing.dp,
+                                            start = leftEdgeSpacing.dp,
                                             bottom = bottomEdgeSpacing.dp,
-                                            end = leftEdgeSpacing.dp
+                                            end = rightEdgeSpacing.dp
                                         ),
                                     horizontalArrangement = horizontalArrangement
                                 ) {
@@ -109,9 +109,9 @@ fun NLayoutDisplay(
                             verticalArrangement = verticalArrangement,
                             modifier = Modifier.padding(
                                 top = topEdgeSpacing.dp,
-                                start = rightEdgeSpacing.dp,
+                                start = leftEdgeSpacing.dp,
                                 bottom = bottomEdgeSpacing.dp,
-                                end = leftEdgeSpacing.dp
+                                end = rightEdgeSpacing.dp
                             )
                         ) {
                             repeat(itemCount) {
@@ -126,9 +126,9 @@ fun NLayoutDisplay(
                                 .height(IntrinsicSize.Max)
                                 .padding(
                                     top = topEdgeSpacing.dp,
-                                    start = rightEdgeSpacing.dp,
+                                    start = leftEdgeSpacing.dp,
                                     bottom = bottomEdgeSpacing.dp,
-                                    end = leftEdgeSpacing.dp
+                                    end = rightEdgeSpacing.dp
                                 )
                         ) {
                             val lineNum =
@@ -156,41 +156,40 @@ fun NLayoutDisplay(
         NLayoutType.SLIDER -> {
             // itemWrap が 0 のときは改行せずそのまま並べる
             if (itemWrap == 0) {
-                Row(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .horizontalScroll(rememberScrollState())
                         .padding(
                             top = topEdgeSpacing.dp,
-                            start = rightEdgeSpacing.dp,
+                            start = leftEdgeSpacing.dp,
                             bottom = bottomEdgeSpacing.dp,
-                            end = leftEdgeSpacing.dp
+                            end = rightEdgeSpacing.dp
                         )
                 ) {
-                    repeat(itemCount) {
-                        DisplayBox(index = it + 1)
+                    Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
+                        repeat(itemCount) {
+                            DisplayBox(index = it + 1)
+                        }
                     }
                 }
             }
             // ItemWrap が 1 以上のときは改行する
             else {
-                Column {
+                Column(
+                    modifier = Modifier.padding(
+                        top = topEdgeSpacing.dp,
+                        start = leftEdgeSpacing.dp,
+                        bottom = bottomEdgeSpacing.dp,
+                        end = rightEdgeSpacing.dp
+                    )
+                ) {
                     val lineNum =
                         // Line が 0 のときは行数制限がない
                         if (line == 0) maxLinesByItem
                         else min(maxLinesByItem, line)
 
                     repeat(lineNum) { lineIndex ->
-                        Row(
-                            modifier = Modifier
-                                .horizontalScroll(rememberScrollState())
-                                .padding(
-                                    top = topEdgeSpacing.dp,
-                                    start = rightEdgeSpacing.dp,
-                                    bottom = bottomEdgeSpacing.dp,
-                                    end = leftEdgeSpacing.dp
-                                )
-                        ) {
+                        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
                             repeat(min(itemCount - itemWrap * lineIndex, itemWrap)) {
                                 DisplayBox(index = itemWrap * lineIndex + it + 1)
                             }
