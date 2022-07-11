@@ -228,10 +228,10 @@ fun NLayout() {
                 line = line.toInt(),
                 itemWrap = itemWrap.toInt(),
                 itemAlign = itemAlign,
-                topEdgeSpacing = 0,
-                leftEdgeSpacing = 0,
-                rightEdgeSpacing = 0,
-                bottomEdgeSpacing = 0,
+                topEdgeSpacing = topEdgeSpacing * 8,
+                leftEdgeSpacing = leftEdgeSpacing * 8,
+                rightEdgeSpacing = rightEdgeSpacing * 8,
+                bottomEdgeSpacing = bottomEdgeSpacing * 8,
                 lineSpacing = 0,
                 itemSpacing = 0
             )
