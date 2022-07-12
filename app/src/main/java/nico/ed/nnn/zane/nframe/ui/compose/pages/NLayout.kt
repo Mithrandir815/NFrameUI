@@ -232,8 +232,8 @@ fun NLayout() {
                 leftEdgeSpacing = leftEdgeSpacing,
                 rightEdgeSpacing = rightEdgeSpacing,
                 bottomEdgeSpacing = bottomEdgeSpacing,
-                lineSpacing = 0,
-                itemSpacing = 0
+                lineSpacing = lineSpacing,
+                itemSpacing = itemSpacing
             )
         }
     }
