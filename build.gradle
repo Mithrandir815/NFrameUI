@@ -1,10 +1,10 @@
 buildscript {
     ext {
-        coroutines_version = '1.6.3'
+        coroutines_version = '1.7.1'
         hilt_version = '2.42'
         kotlin_version = '1.7.0'
-        lifecycle_version = '2.5.0'
-        navigation_version = '2.5.0'
+        lifecycle_version = '2.6.1'
+        navigation_version = '2.5.3'
     }
     repositories {
         gradlePluginPortal()
@@ -15,8 +15,8 @@ buildscript {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.android.tools.build:gradle:7.2.1'
-        classpath 'com.google.gms:google-services:4.3.13'
+        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.google.gms:google-services:4.3.15'
     }
 }
 
