@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import nico.ed.nnn.zane.nframe.ui.theme.Blue300
 
 @Composable
@@ -32,29 +33,25 @@ fun Bar(height: Dp, color: Color) {
         Modifier
             .width(10.dp)
             .height(height)
-            .background(color, shape = RoundedCornerShape(3.dp))
-            .padding(
-                bottom = 20.dp, top = 100
-                    .dp
-            )
+            .background(color, shape = RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp))
     )
 }
 
 @Composable
-fun VerticalBarGraph(dataList: List<Int>) {
+fun VerticalBarGraph(dataList: List<Int>, modifier: Modifier) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         verticalAlignment = Alignment.Bottom
     ) {
         Spacer(modifier = Modifier.width(36.dp))
         val length = dataList.size
         dataList.forEachIndexed { index, data ->
             val barColor =
-                if (index == length - 1) Color.Blue.copy(alpha = 0.1f) else Blue300.copy(alpha = 0.1f)
+                if (index == length - 1) Color.Blue.copy(alpha = 0.9f) else Blue300.copy(alpha = 0.9f)
             Column(
                 modifier = Modifier
                     .background(color = if (index == length - 1) Color.Blue.copy(alpha = 0.2f) else Color.Transparent)
-                    .padding(horizontal = 5.dp),
+                    .padding(start = 5.dp, end = 5.dp, top = 10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Bar(height = data.dp, color = barColor)
@@ -79,14 +76,15 @@ fun VerticalBarGraph(dataList: List<Int>) {
 
 @Composable
 fun VerticalBarGraphScreen() {
-    val dataList = listOf(50, 20, 20, 10, 50, 0, 20, 10, 30, 20, 5, 9, 4, 40)
+    val dataList = listOf(30, 20, 20, 10, 30, 0, 20, 10, 30, 20, 5, 9, 4, 50)
     // 点の横幅っぽい
     val onInterval = 1f
     // 点の感覚っぽい
     val offInterval = 5f
     Column(
         modifier = Modifier
-            .background(color = Color.White)
+            .background(color = Color.White),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -99,7 +97,7 @@ fun VerticalBarGraphScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(text = "学習数 累計", fontSize = 10.sp)
-                Text(text = "12,112", fontSize = 24.sp)
+                Text(text = "999,999", fontSize = 32.sp)
             }
             Column(
                 modifier = Modifier
@@ -108,7 +106,7 @@ fun VerticalBarGraphScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(text = "1日平均", fontSize = 10.sp, color = Color.Blue)
-                Text(text = "10.2", fontSize = 24.sp, color = Color.Blue)
+                Text(text = "999,999", fontSize = 24.sp, color = Color.Blue)
             }
             Column(
                 modifier = Modifier
@@ -121,7 +119,7 @@ fun VerticalBarGraphScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(text = "今日", fontSize = 10.sp, color = Color.Blue)
-                Text(text = "12", fontSize = 24.sp, color = Color.Blue)
+                Text(text = "999,999", fontSize = 24.sp, color = Color.Blue)
             }
         }
         Box(
@@ -129,32 +127,46 @@ fun VerticalBarGraphScreen() {
                 .fillMaxWidth(),
             contentAlignment = Alignment.BottomCenter
         ) {
-
-            Row(
-                modifier = Modifier.padding(start = 10.dp, end = 40.dp, bottom = 50.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    modifier = Modifier.padding(bottom = 8.dp),
-                    text = "平均",
-                    fontSize = 8.sp,
-                    color = Color.Blue
-                )
-                Canvas(modifier = Modifier.width(300.dp)) {
-                    drawRoundRect(
-                        color = Color.Blue,
-                        cornerRadius = CornerRadius(1f),
-                        style = Stroke(
-                            width = 1f,
-                            pathEffect = PathEffect.dashPathEffect(
-                                intervals = floatArrayOf(onInterval, offInterval),
-                                phase = onInterval + offInterval,
+            ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
+                val (average, graph) = createRefs()
+                Row(
+                    modifier = Modifier
+                        .padding(bottom = 40.dp)
+                        .constrainAs(average) {
+                            end.linkTo(graph.end)
+                            bottom.linkTo(graph.bottom)
+                        },
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        modifier = Modifier.padding(end = 2.dp),
+                        text = "平均",
+                        fontSize = 8.sp,
+                        color = Color.Blue
+                    )
+                    Canvas(
+                        modifier = Modifier
+                            .width(303.dp)
+                            .padding(end = 5.dp)
+                    ) {
+                        drawRoundRect(
+                            color = Color.Blue,
+                            cornerRadius = CornerRadius(1f),
+                            style = Stroke(
+                                width = 1f,
+                                pathEffect = PathEffect.dashPathEffect(
+                                    intervals = floatArrayOf(onInterval, offInterval),
+                                    phase = onInterval + offInterval,
+                                )
                             )
                         )
-                    )
+                    }
                 }
+                VerticalBarGraph(
+                    dataList,
+                    modifier = Modifier.constrainAs(graph) {}
+                )
             }
-            VerticalBarGraph(dataList)
         }
     }
 }
