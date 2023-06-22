@@ -24,10 +24,15 @@ fun Charts() {
             NFrameTopAppBar(R.string.charts)
         }
     ) { padding ->
+        // ここにサンプル実装をお願いします
         ChartsSample(modifier = Modifier.padding(padding))
     }
 }
 
+/**
+ * charts ライブラリのサンプル実装
+ * @see <a href="https://github.com/tehras/charts">charts</a>
+ */
 @Preview
 @Composable
 private fun ChartsSample(modifier: Modifier = Modifier) {
