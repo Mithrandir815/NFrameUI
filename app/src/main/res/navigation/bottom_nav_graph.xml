@@ -11,4 +11,7 @@
     <fragment
         android:id="@+id/n_card"
         android:name="nico.ed.nnn.zane.nframe.NCardFragment" />
+    <fragment
+        android:id="@+id/charts"
+        android:name="nico.ed.nnn.zane.nframe.ChartsFragment" />
 </navigation>
