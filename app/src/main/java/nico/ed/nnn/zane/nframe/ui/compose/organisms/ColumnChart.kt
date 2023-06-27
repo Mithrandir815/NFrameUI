@@ -93,11 +93,6 @@ private val markerMap: Map<Float, Marker>
 
 @Composable
 fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
-//    val dataList = listOf(30, 20, 20, 10, 30, 0, 20, 10, 30, 20, 5, 9, 4, 50)
-//    // 点の横幅っぽい
-//    val onInterval = 1f
-//    // 点の感覚っぽい
-//    val offInterval = 5f
     Column(
         modifier = modifier
             .height(172.dp)
@@ -149,20 +144,20 @@ fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
         ) {
             val sample = listOf(
                 Pair("", 0),
-                Pair("12/25", 5),
-                Pair("2", 5),
-                Pair("3", 6),
-                Pair("4", 7),
-                Pair("5", 7),
+                Pair("12/25", 1),
+                Pair("2", 1),
+                Pair("3", 1),
+                Pair("4", 2),
+                Pair("5", 3),
                 Pair("6", 7),
                 Pair("7", 10),
                 Pair("8", 7),
                 Pair("9", 12),
-                Pair("10", 7),
-                Pair("11", 7),
-                Pair("12", 7),
-                Pair("13", 7),
-                Pair("14", 7),
+                Pair("10", 2),
+                Pair("11", 2),
+                Pair("12", 2),
+                Pair("13", 2),
+                Pair("14", 2),
             )
             VicoColumnChart(
                 chartValues = sample

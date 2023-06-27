@@ -14,6 +14,10 @@
         android:title="@string/n_card" />
     <item
         android:id="@+id/charts"
-        android:icon="@drawable/ic_n_chart"
+        android:icon="@android:drawable/gallery_thumb"
         android:title="@string/charts" />
+    <item
+        android:id="@+id/n_chart"
+        android:icon="@drawable/ic_n_chart"
+        android:title="@string/n_chart" />
 </menu>
