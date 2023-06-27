@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId 'nico.ed.nnn.zane.nframe'
-        minSdk 24
+        minSdk = 26
         targetSdk 33
         versionCode 1
         versionName '1.0'
@@ -31,20 +31,21 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = "17"
     }
     buildFeatures {
         compose true
         viewBinding true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.7'
+        kotlinCompilerExtensionVersion '1.2.0'
     }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    namespace 'nico.ed.nnn.zane.nframe'
 }
 
 dependencies {
@@ -75,4 +76,11 @@ dependencies {
     implementation 'com.github.tehras:charts:0.2.4-alpha'
     kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    // Includes the core logic for charts and other elements.
+    implementation "com.patrykandpatrick.vico:core:1.6.5"
+    // For Jetpack Compose.
+    implementation "com.patrykandpatrick.vico:compose:1.6.5"
+    // For `compose`. Creates a `ChartStyle` based on an M2 Material Theme.
+    implementation "com.patrykandpatrick.vico:compose-m2:1.6.5"
+    implementation "com.patrykandpatrick.vico:compose-m3:1.6.5"
 }

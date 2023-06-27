@@ -6,4 +6,5 @@
     <string name="n_layout">NLayout</string>
     <string name="n_card">NCard</string>
     <string name="charts">Charts</string>
+    <string name="n_chart">NChart</string>
 </resources>
