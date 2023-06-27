@@ -93,11 +93,11 @@ private val markerMap: Map<Float, Marker>
 
 @Composable
 fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
-    Column(
+    Box(
         modifier = modifier
             .height(172.dp)
             .background(color = Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally
+        contentAlignment = Alignment.Center
     ) {
         Row(
             modifier = Modifier
@@ -139,7 +139,8 @@ fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
         }
         Box(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(top = 80.dp),
             contentAlignment = Alignment.BottomCenter
         ) {
             val sample = listOf(
@@ -153,7 +154,7 @@ fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
                 Pair("7", 10),
                 Pair("8", 7),
                 Pair("9", 12),
-                Pair("10", 2),
+                Pair("10", 20),
                 Pair("11", 2),
                 Pair("12", 2),
                 Pair("13", 2),
@@ -162,45 +163,6 @@ fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
             VicoColumnChart(
                 chartValues = sample
             )
-//            ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
-//                val (average, graph) = createRefs()
-//                Row(
-//                    modifier = Modifier
-//                        .padding(bottom = 40.dp)
-//                        .constrainAs(average) {
-//                            end.linkTo(graph.end)
-//                            bottom.linkTo(graph.bottom)
-//                        },
-//                    verticalAlignment = Alignment.CenterVertically
-//                ) {
-//                    Text(
-//                        modifier = Modifier.padding(end = 2.dp),
-//                        text = "平均:7",
-//                        fontSize = 8.sp,
-//                        color = Color.Blue
-//                    )
-//                    Canvas(
-//                        modifier = Modifier
-//                            .width(310.dp)
-//                    ) {
-//                        drawRoundRect(
-//                            color = Color.Blue,
-//                            cornerRadius = CornerRadius(1f),
-//                            style = Stroke(
-//                                width = 1f,
-//                                pathEffect = PathEffect.dashPathEffect(
-//                                    intervals = floatArrayOf(onInterval, offInterval),
-//                                    phase = onInterval + offInterval,
-//                                )
-//                            )
-//                        )
-//                    }
-//                }
-//                VerticalBarGraph(
-//                    dataList,
-//                    modifier = Modifier.constrainAs(graph) {}
-//                )
-//            }
         }
     }
 }
