@@ -5,4 +5,5 @@
     <string name="n_frame_display">NFrame 表示</string>
     <string name="n_layout">NLayout</string>
     <string name="n_card">NCard</string>
+    <string name="n_chart">NChart</string>
 </resources>

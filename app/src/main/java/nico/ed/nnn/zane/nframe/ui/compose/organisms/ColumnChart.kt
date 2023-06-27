@@ -1,6 +1,5 @@
 package nico.ed.nnn.zane.nframe.ui.compose.organisms
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,15 +15,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
+import com.patrykandpatrick.vico.core.entry.entryModelOf
+import com.patrykandpatrick.vico.core.marker.Marker
 import nico.ed.nnn.zane.nframe.ui.theme.Blue300
 
 @Composable
@@ -74,25 +71,48 @@ fun VerticalBarGraph(dataList: List<Int>, modifier: Modifier) {
     }
 }
 
+private val model1 = entryModelOf(
+    1 to 2,
+    2 to 4,
+    3 to 1,
+    4 to 4,
+    5 to 4,
+    6 to 4,
+    7 to 4,
+    8 to 4,
+    9 to 4,
+    10 to 4,
+    11 to 4,
+    12 to 4,
+    13 to 4,
+    14 to 4
+)
+
+private val markerMap: Map<Float, Marker>
+    @Composable get() = mapOf(4f to rememberMarker())
+
 @Composable
-fun VerticalBarGraphScreen() {
-    val dataList = listOf(30, 20, 20, 10, 30, 0, 20, 10, 30, 20, 5, 9, 4, 50)
-    // 点の横幅っぽい
-    val onInterval = 1f
-    // 点の感覚っぽい
-    val offInterval = 5f
+fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
+//    val dataList = listOf(30, 20, 20, 10, 30, 0, 20, 10, 30, 20, 5, 9, 4, 50)
+//    // 点の横幅っぽい
+//    val onInterval = 1f
+//    // 点の感覚っぽい
+//    val offInterval = 5f
     Column(
-        modifier = Modifier
+        modifier = modifier
+            .height(172.dp)
             .background(color = Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
             horizontalArrangement = Arrangement.Center
         ) {
             Column(
                 modifier = Modifier
-                    .width(100.dp)
+                    .width(120.dp)
                     .padding(top = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -127,46 +147,65 @@ fun VerticalBarGraphScreen() {
                 .fillMaxWidth(),
             contentAlignment = Alignment.BottomCenter
         ) {
-            ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
-                val (average, graph) = createRefs()
-                Row(
-                    modifier = Modifier
-                        .padding(bottom = 40.dp)
-                        .constrainAs(average) {
-                            end.linkTo(graph.end)
-                            bottom.linkTo(graph.bottom)
-                        },
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        modifier = Modifier.padding(end = 2.dp),
-                        text = "平均",
-                        fontSize = 8.sp,
-                        color = Color.Blue
-                    )
-                    Canvas(
-                        modifier = Modifier
-                            .width(303.dp)
-                            .padding(end = 5.dp)
-                    ) {
-                        drawRoundRect(
-                            color = Color.Blue,
-                            cornerRadius = CornerRadius(1f),
-                            style = Stroke(
-                                width = 1f,
-                                pathEffect = PathEffect.dashPathEffect(
-                                    intervals = floatArrayOf(onInterval, offInterval),
-                                    phase = onInterval + offInterval,
-                                )
-                            )
-                        )
-                    }
-                }
-                VerticalBarGraph(
-                    dataList,
-                    modifier = Modifier.constrainAs(graph) {}
-                )
-            }
+            val sample = listOf(
+                Pair("", 0),
+                Pair("12/25", 5),
+                Pair("2", 5),
+                Pair("3", 6),
+                Pair("4", 7),
+                Pair("5", 7),
+                Pair("6", 7),
+                Pair("7", 10),
+                Pair("8", 7),
+                Pair("9", 12),
+                Pair("10", 7),
+                Pair("11", 7),
+                Pair("12", 7),
+                Pair("13", 7),
+                Pair("14", 7),
+            )
+            VicoColumnChart(
+                chartValues = sample
+            )
+//            ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
+//                val (average, graph) = createRefs()
+//                Row(
+//                    modifier = Modifier
+//                        .padding(bottom = 40.dp)
+//                        .constrainAs(average) {
+//                            end.linkTo(graph.end)
+//                            bottom.linkTo(graph.bottom)
+//                        },
+//                    verticalAlignment = Alignment.CenterVertically
+//                ) {
+//                    Text(
+//                        modifier = Modifier.padding(end = 2.dp),
+//                        text = "平均:7",
+//                        fontSize = 8.sp,
+//                        color = Color.Blue
+//                    )
+//                    Canvas(
+//                        modifier = Modifier
+//                            .width(310.dp)
+//                    ) {
+//                        drawRoundRect(
+//                            color = Color.Blue,
+//                            cornerRadius = CornerRadius(1f),
+//                            style = Stroke(
+//                                width = 1f,
+//                                pathEffect = PathEffect.dashPathEffect(
+//                                    intervals = floatArrayOf(onInterval, offInterval),
+//                                    phase = onInterval + offInterval,
+//                                )
+//                            )
+//                        )
+//                    }
+//                }
+//                VerticalBarGraph(
+//                    dataList,
+//                    modifier = Modifier.constrainAs(graph) {}
+//                )
+//            }
         }
     }
 }
@@ -174,5 +213,7 @@ fun VerticalBarGraphScreen() {
 @Preview
 @Composable
 private fun PreviewNFrameGraph() {
-    VerticalBarGraphScreen()
+    VerticalBarGraphScreen(
+
+    )
 }
