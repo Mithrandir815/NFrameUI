@@ -27,8 +27,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = "17"
@@ -38,7 +38,7 @@ android {
         viewBinding true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.2.0'
+        kotlinCompilerExtensionVersion '1.4.7'
     }
     packagingOptions {
         resources {
@@ -74,6 +74,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'io.coil-kt:coil-compose:2.4.0'
     implementation 'com.github.tehras:charts:0.2.4-alpha'
+    implementation 'co.yml:ycharts:2.0.0'
     kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     // Includes the core logic for charts and other elements.
