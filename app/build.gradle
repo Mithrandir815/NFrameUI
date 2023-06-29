@@ -76,6 +76,7 @@ dependencies {
     implementation 'com.github.tehras:charts:0.2.4-alpha'
     implementation 'co.yml:ycharts:2.0.0'
     implementation 'ma.hu:compose-charts:0.3.5'
+    implementation 'com.github.jaikeerthick:Composable-Graphs:v1.2.1'
     kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     // Includes the core logic for charts and other elements.
