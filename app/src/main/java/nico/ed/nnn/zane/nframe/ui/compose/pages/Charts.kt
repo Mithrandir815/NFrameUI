@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nico.ed.nnn.zane.nframe.R
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.NFrameTopAppBar
-import nico.ed.nnn.zane.nframe.ui.compose.organisms.YChartsSample
+import nico.ed.nnn.zane.nframe.ui.compose.organisms.ComposeChartsSample
 
 @Preview
 @Composable
@@ -19,6 +19,7 @@ fun Charts() {
     ) { padding ->
         // ここにサンプル実装をお願いします
 //        ChartsSample(modifier = Modifier.padding(padding))
-        YChartsSample(modifier = Modifier.padding(padding))
+//        YChartsSample(modifier = Modifier.padding(padding))
+        ComposeChartsSample(modifier = Modifier.padding(padding))
     }
 }
