@@ -87,6 +87,10 @@ private val BarsSampleData = listOf(
     ),
 )
 
+/**
+ * compose-charts ライブラリのサンプル実装
+ * @see <a href="https://github.com/humawork/compose-charts">compose-charts</a>
+ */
 @Preview
 @Composable
 fun ComposeChartsSample(modifier: Modifier = Modifier) {
