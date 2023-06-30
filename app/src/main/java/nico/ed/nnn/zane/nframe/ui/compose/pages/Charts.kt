@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import nico.ed.nnn.zane.nframe.R
 import nico.ed.nnn.zane.nframe.ui.compose.atoms.NFrameTopAppBar
-import nico.ed.nnn.zane.nframe.ui.compose.organisms.DiamondChartsSample
+import nico.ed.nnn.zane.nframe.ui.compose.organisms.PlotWizardSample
 
 @Preview
 @Composable
@@ -22,6 +22,7 @@ fun Charts() {
 //        YChartsSample(modifier = Modifier.padding(padding))
 //        ComposeChartsSample(modifier = Modifier.padding(padding))
 //        ComposableGraphsSample(modifier = Modifier.padding(padding))
-        DiamondChartsSample(modifier = Modifier.padding(padding))
+//        DiamondChartsSample(modifier = Modifier.padding(padding))
+        PlotWizardSample(modifier = Modifier.padding(padding))
     }
 }
