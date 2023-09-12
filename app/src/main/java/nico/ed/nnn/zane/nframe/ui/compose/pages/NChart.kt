@@ -55,7 +55,7 @@ fun NChart() {
                 )
                 Row(
                     modifier = Modifier
-                        .padding(top = 28.dp, bottom = 48.dp, start = 16.dp)
+                        .padding(top = 28.dp, bottom = 24.dp, start = 16.dp)
                         .height(IntrinsicSize.Max)
                 ) {
                     Box(
@@ -80,10 +80,10 @@ fun NChart() {
                 }
             }
             // TODO - オフセットですとコンテンツ全体が上に上がってしまい。無駄な余白ができてしまう
-            VerticalBarGraphScreen(modifier = Modifier.offset(y = (-32).dp))
+            VerticalBarGraphScreen(modifier = Modifier.offset(y = (-8).dp))
             Column(
                 modifier = Modifier
-                    .offset(y = (-16).dp)
+                    .padding(top = 4.dp)
                     .background(color = Color.White)
             ) {
                 repeat(20) {
@@ -100,7 +100,6 @@ fun NChart() {
                             color = Color.Black,
                             fontSize = 20.sp
                         )
-
                     }
                 }
             }
