@@ -8,7 +8,10 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+<<<<<<< HEAD
 import androidx.compose.foundation.layout.fillMaxSize
+=======
+>>>>>>> main
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -44,6 +47,7 @@ fun NChart() {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
+<<<<<<< HEAD
                     .height(IntrinsicSize.Min)
             ) {
                 //ここで大きい画像だと画像の高さになってしまい高さがおかしくなります。
@@ -52,12 +56,26 @@ fun NChart() {
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .fillMaxSize(),
+=======
+                    .height(IntrinsicSize.Max)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.nbg_media_png),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(),
+>>>>>>> main
                     contentDescription = null,
                 )
                 Row(
                     modifier = Modifier
                         .padding(top = 28.dp, bottom = 48.dp, start = 16.dp)
+<<<<<<< HEAD
                         .height(IntrinsicSize.Min)
+=======
+                        .height(IntrinsicSize.Max)
+>>>>>>> main
                 ) {
                     Box(
                         modifier = Modifier
@@ -80,7 +98,10 @@ fun NChart() {
                     }
                 }
             }
+<<<<<<< HEAD
             // TODO - オフセットですとコンテンツ全体が上に上がってしまい。無駄な余白ができてしまう
+=======
+>>>>>>> main
             VerticalBarGraphScreen(modifier = Modifier.offset(y = (-32).dp))
             Column(
                 modifier = Modifier
