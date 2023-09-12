@@ -15,7 +15,6 @@ import com.patrykandpatrick.vico.core.component.shape.cornered.Corner
 import com.patrykandpatrick.vico.core.component.shape.cornered.MarkerCorneredShape
 import com.patrykandpatrick.vico.core.component.shape.cornered.RoundedCornerTreatment
 import com.patrykandpatrick.vico.core.context.MeasureContext
-import com.patrykandpatrick.vico.core.marker.DefaultMarkerLabelFormatter
 import com.patrykandpatrick.vico.core.marker.Marker
 import nico.ed.nnn.zane.nframe.ui.theme.Blue800
 
