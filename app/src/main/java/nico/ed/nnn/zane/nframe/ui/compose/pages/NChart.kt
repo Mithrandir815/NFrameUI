@@ -83,7 +83,7 @@ fun NChart() {
             VerticalBarGraphScreen(modifier = Modifier.offset(y = (-8).dp))
             Column(
                 modifier = Modifier
-                    .padding(top = 4.dp)
+                    .padding(top = 8.dp)
                     .background(color = Color.White)
             ) {
                 repeat(20) {
