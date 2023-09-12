@@ -49,6 +49,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.compose.material3:material3:1.1.1'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
     debugImplementation "androidx.compose.ui:ui-tooling:1.4.3"
     implementation "androidx.compose.animation:animation:1.4.3"
@@ -82,10 +83,10 @@ dependencies {
     kapt "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
     // Includes the core logic for charts and other elements.
-    implementation "com.patrykandpatrick.vico:core:1.6.5"
+    implementation "com.patrykandpatrick.vico:core:1.9.1"
     // For Jetpack Compose.
-    implementation "com.patrykandpatrick.vico:compose:1.6.5"
+    implementation "com.patrykandpatrick.vico:compose:1.9.1"
     // For `compose`. Creates a `ChartStyle` based on an M2 Material Theme.
-    implementation "com.patrykandpatrick.vico:compose-m2:1.6.5"
-    implementation "com.patrykandpatrick.vico:compose-m3:1.6.5"
+    implementation "com.patrykandpatrick.vico:compose-m2:1.9.1"
+    implementation "com.patrykandpatrick.vico:compose-m3:1.9.1"
 }

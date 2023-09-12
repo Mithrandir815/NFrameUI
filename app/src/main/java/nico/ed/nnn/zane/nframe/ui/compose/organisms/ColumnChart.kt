@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -23,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.patrykandpatrick.vico.core.entry.entryModelOf
 import com.patrykandpatrick.vico.core.marker.Marker
 import nico.ed.nnn.zane.nframe.ui.theme.Blue300
+import nico.ed.nnn.zane.nframe.ui.theme.Gray500
 
 @Composable
 fun Bar(height: Dp, color: Color) {
@@ -95,70 +98,89 @@ private val markerMap: Map<Float, Marker>
 fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
-            .height(172.dp)
-            .background(color = Color.White),
-        contentAlignment = Alignment.Center
+            .height(188.dp)
+            .background(color = Color.White, shape = RoundedCornerShape(5))
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Column(
+        Column {
+            Text(
                 modifier = Modifier
-                    .width(120.dp)
-                    .padding(top = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "学習数 累計", fontSize = 10.sp)
-                Text(text = "999,999", fontSize = 32.sp)
-            }
-            Column(
+                    .fillMaxWidth()
+                    .padding(vertical = 12.dp, horizontal = 16.dp),
+                text = "学習数",
+                fontSize = 14.sp,
+                color = Gray500
+            )
+            Row(
                 modifier = Modifier
-                    .width(100.dp)
-                    .padding(top = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp),
+                horizontalArrangement = Arrangement.Center
             ) {
-                Text(text = "1日平均", fontSize = 10.sp, color = Color.Blue)
-                Text(text = "999,999", fontSize = 24.sp, color = Color.Blue)
-            }
-            Column(
-                modifier = Modifier
-                    .width(100.dp)
-                    .padding(top = 16.dp)
-                    .background(
-                        color = Color.Blue.copy(alpha = 0.1f),
-                        shape = RoundedCornerShape(6.dp)
-                    ),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "今日", fontSize = 10.sp, color = Color.Blue)
-                Text(text = "999,999", fontSize = 24.sp, color = Color.Blue)
+                Column(
+                    modifier = Modifier
+                        .width(144.dp)
+                        .padding(horizontal = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "学習数 累計", fontSize = 10.sp, color = Gray500)
+                    Text(text = "999,999", fontSize = 32.sp, fontWeight = FontWeight.ExtraBold)
+                }
+                Spacer(
+                    modifier = Modifier
+                        .height(52.dp)
+                        .width(1.dp)
+                        .background(color = Color.Black.copy(alpha = 0.1f))
+                )
+                Column(
+                    modifier = Modifier
+                        .width(95.dp)
+                        .padding(horizontal = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "今日", fontSize = 10.sp, color = Gray500)
+                    Text(text = "99", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
+                }
+                Spacer(
+                    modifier = Modifier
+                        .height(52.dp)
+                        .width(1.dp)
+                        .background(color = Color.Black.copy(alpha = 0.1f))
+                )
+                Column(
+                    modifier = Modifier
+                        .width(95.dp)
+                        .padding(horizontal = 8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "平均(2週間)", fontSize = 10.sp, color = Gray500)
+                    Text(text = "99", fontSize = 24.sp, fontWeight = FontWeight.ExtraBold)
+                }
             }
         }
+        //被せることによってグラフのバルーンが数値の上に来るようにしている
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 80.dp),
+                .padding(top = 80.dp, bottom = 16.dp),
             contentAlignment = Alignment.BottomCenter
         ) {
             val sample = listOf(
+                //平均の文字をグラフないに収めるために最初のデータを無くす
                 Pair("", 0),
-                Pair("12/25", 1),
-                Pair("2", 1),
-                Pair("3", 1),
-                Pair("4", 2),
+                Pair("12/25", 10),
+                Pair("2", 9),
+                Pair("3", 9),
+                Pair("4", 8),
                 Pair("5", 3),
                 Pair("6", 7),
                 Pair("7", 10),
                 Pair("8", 7),
                 Pair("9", 12),
                 Pair("10", 20),
-                Pair("11", 2),
-                Pair("12", 2),
-                Pair("13", 2),
-                Pair("14", 2),
+                Pair("11", 0),
+                Pair("12", 10),
+                Pair("13", 6),
+                Pair("14", 10),
             )
             VicoColumnChart(
                 chartValues = sample
