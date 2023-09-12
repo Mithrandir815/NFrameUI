@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,35 +30,9 @@ import nico.ed.nnn.zane.nframe.ui.theme.Blue300
 import nico.ed.nnn.zane.nframe.ui.theme.Blue500
 
 
-private const val COLOR_1_CODE = 0xffff5500
-private const val THRESHOLD_LINE_VALUE = 3f
 private val chartColors = listOf(Blue300, Blue500)
 private const val GUIDELINE_GAP_LENGTH_DP = 3f
 private const val GUIDELINE_DASH_LENGTH_DP = 3f
-
-//fun textComponent(
-//    color: Int = android.graphics.Color.BLACK,
-//    textSize: TextUnit = DefaultDimens.TEXT_COMPONENT_TEXT_SIZE.sp,
-//    background: ShapeComponent? = null,
-//    ellipsize: TextUtils.TruncateAt? = null,
-//    lineCount: Int = DEF_LABEL_LINE_COUNT,
-//    padding: MutableDimensions = emptyDimensions(),
-//    margins: MutableDimensions = emptyDimensions(),
-//    typeface: Typeface? = null,
-//    textAlignment: Layout.Alignment = Layout.Alignment.ALIGN_NORMAL,
-//): TextComponent = TextComponent().apply {
-//    this.color = color
-//    this.ellipsize
-//    color = this@Builder.color
-//    textSizeSp = this@Builder.textSizeSp
-//    typeface = this@Builder.typeface
-//    ellipsize = this@Builder.ellipsize
-//    lineCount = this@Builder.lineCount
-//    background = this@Builder.background
-//    textAlignment = this@Builder.textAlignment
-//    padding.set(this@Builder.padding)
-//    margins.set(this@Builder.margins)
-//}
 
 @Composable
 fun VicoColumnChart(
@@ -71,48 +46,29 @@ fun VicoColumnChart(
         AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _ -> date[x.toInt() % date.size] }
     val thresholdLine = rememberThresholdLine((chartValues.sumOf { it.second } / 14f))
     ProvideChartStyle(rememberChartStyle(chartColors)) {
-        val defaultColumns = currentChartStyle.columnChart.columns
         Chart(
             modifier = Modifier
                 .width(336.dp)
                 .height(94.dp),
             chart = columnChart(
-                columns = remember(defaultColumns) {
-                    defaultColumns.map {
-                        // 最後の要素の場合は別の処理を行う
-                        LineComponent(
-                            it.color,
-                            12f,
-                            Shapes.roundedCornerShape(
-                                topRightPercent = 30,
-                                topLeftPercent = 30
-                            ),
-                        )
-
-                    }
-//                        defaultColumns.mapIndexed { index, lineComponent ->
-//                        // 最後の要素の場合は別の処理を行う
-//                        if (index == defaultColumns.size - 1) {
-//                            LineComponent(
-//                                Blue300.toArgb(),
-//                                12f,
-//                                Shapes.roundedCornerShape(
-//                                    topRightPercent = 30,
-//                                    topLeftPercent = 30
-//                                ),
-//                            )
-//                        } else {
-//                            LineComponent(
-//                                lineComponent.color,
-//                                12f,
-//                                Shapes.roundedCornerShape(
-//                                    topRightPercent = 30,
-//                                    topLeftPercent = 30
-//                                ),
-//                            )
-//                        }
-//                    }
-                },
+                columns = listOf(
+                    LineComponent(
+                        Blue300.toArgb(),
+                        12f,
+                        Shapes.roundedCornerShape(
+                            topRightPercent = 30,
+                            topLeftPercent = 30
+                        ),
+                    ),
+                    LineComponent(
+                        Blue500.toArgb(),
+                        12f,
+                        Shapes.roundedCornerShape(
+                            topRightPercent = 30,
+                            topLeftPercent = 30
+                        ),
+                    )
+                ),
                 decorations = remember(thresholdLine) { listOf(thresholdLine) },
                 targetVerticalAxisPosition = targetVerticalAxisPosition,
                 spacing = 10.dp
