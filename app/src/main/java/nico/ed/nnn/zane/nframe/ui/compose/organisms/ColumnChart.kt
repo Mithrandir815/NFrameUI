@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -164,21 +165,22 @@ fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
             contentAlignment = Alignment.BottomCenter
         ) {
             val sample = listOf(
+                //平均の文字をグラフないに収めるために最初のデータを無くす
                 Pair("", 0),
-                Pair("12/25", 1),
-                Pair("2", 1),
-                Pair("3", 1),
-                Pair("4", 2),
+                Pair("12/25", 10),
+                Pair("2", 9),
+                Pair("3", 9),
+                Pair("4", 8),
                 Pair("5", 3),
                 Pair("6", 7),
                 Pair("7", 10),
                 Pair("8", 7),
                 Pair("9", 12),
                 Pair("10", 20),
-                Pair("11", 2),
-                Pair("12", 2),
-                Pair("13", 2),
-                Pair("14", 2),
+                Pair("11", 0),
+                Pair("12", 10),
+                Pair("13", 6),
+                Pair("14", 10),
             )
             VicoColumnChart(
                 chartValues = sample

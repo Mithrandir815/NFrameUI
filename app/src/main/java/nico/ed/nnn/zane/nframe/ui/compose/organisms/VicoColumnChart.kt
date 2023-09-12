@@ -28,9 +28,9 @@ import com.patrykandpatrick.vico.core.entry.entryModelOf
 import nico.ed.nnn.zane.nframe.ui.theme.Blue300
 import nico.ed.nnn.zane.nframe.ui.theme.Blue500
 
+
 private const val COLOR_1_CODE = 0xffff5500
 private const val THRESHOLD_LINE_VALUE = 3f
-
 private val chartColors = listOf(Blue300, Blue500)
 private const val GUIDELINE_GAP_LENGTH_DP = 3f
 private const val GUIDELINE_DASH_LENGTH_DP = 3f
@@ -69,7 +69,7 @@ fun VicoColumnChart(
     val model = entryModelOf(*count.toTypedArray())
     val bottomAxisValueFormatter =
         AxisValueFormatter<AxisPosition.Horizontal.Bottom> { x, _ -> date[x.toInt() % date.size] }
-    val thresholdLine = rememberThresholdLine()
+    val thresholdLine = rememberThresholdLine((chartValues.sumOf { it.second } / 14f))
     ProvideChartStyle(rememberChartStyle(chartColors)) {
         val defaultColumns = currentChartStyle.columnChart.columns
         Chart(
@@ -136,7 +136,7 @@ fun VicoColumnChart(
 }
 
 @Composable
-private fun rememberThresholdLine(): ThresholdBehindLine {
+private fun rememberThresholdLine(ave: Float): ThresholdBehindLine {
     val guidelineShape = DashedShape(
         Shapes.pillShape,
         GUIDELINE_DASH_LENGTH_DP,
@@ -152,7 +152,7 @@ private fun rememberThresholdLine(): ThresholdBehindLine {
     )
     return remember(line, label) {
         ThresholdBehindLine(
-            thresholdValue = THRESHOLD_LINE_VALUE,
+            thresholdValue = ave,
             lineComponent = line,
             labelComponent = label,
             minimumLineThicknessDp = 2f
