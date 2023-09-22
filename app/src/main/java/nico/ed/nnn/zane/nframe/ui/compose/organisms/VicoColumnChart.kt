@@ -14,11 +14,9 @@ import com.patrykandpatrick.vico.compose.axis.axisLabelComponent
 import com.patrykandpatrick.vico.compose.axis.axisTickComponent
 import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
 import com.patrykandpatrick.vico.compose.chart.Chart
-import com.patrykandpatrick.vico.compose.chart.column.columnChart
 import com.patrykandpatrick.vico.compose.component.shapeComponent
 import com.patrykandpatrick.vico.compose.component.textComponent
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
-import com.patrykandpatrick.vico.compose.style.currentChartStyle
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.AxisPosition.Vertical
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
@@ -28,6 +26,7 @@ import com.patrykandpatrick.vico.core.component.shape.Shapes
 import com.patrykandpatrick.vico.core.entry.entryModelOf
 import nico.ed.nnn.zane.nframe.ui.theme.Blue300
 import nico.ed.nnn.zane.nframe.ui.theme.Blue500
+import nico.ed.nnn.zane.nframe.wrapper.customColumnChart
 
 
 private val chartColors = listOf(Blue300, Blue500)
@@ -50,7 +49,7 @@ fun VicoColumnChart(
             modifier = Modifier
                 .width(336.dp)
                 .height(94.dp),
-            chart = columnChart(
+            chart = customColumnChart(
                 columns = listOf(
                     LineComponent(
                         Blue300.toArgb(),
