@@ -72,7 +72,9 @@ fun VicoColumnChart(
                 targetVerticalAxisPosition = targetVerticalAxisPosition,
                 spacing = 10.dp
             ),
+            //チャートで使用するデータ
             model = model,
+            //x軸のラベルなどを作成する要素
             bottomAxis = rememberBottomAxis(
                 label = axisLabelComponent(
                     textSize = 8.sp,
@@ -85,6 +87,7 @@ fun VicoColumnChart(
                 tick = axisTickComponent(thickness = 0.dp, strokeWidth = 0.dp),
                 valueFormatter = bottomAxisValueFormatter
             ),
+            //バルーンのを作成する要素
             marker = rememberMarker(),
         )
     }
@@ -98,7 +101,7 @@ private fun rememberThresholdLine(ave: Float): ThresholdBehindLine {
         GUIDELINE_GAP_LENGTH_DP
     )
     val line = shapeComponent(
-        color = Color.Gray.copy(0.1f),
+        color = Color.Black.copy(alpha = 0.2f),
         shape = guidelineShape
     )
     val label = textComponent(
