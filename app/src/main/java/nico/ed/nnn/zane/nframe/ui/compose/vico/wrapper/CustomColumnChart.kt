@@ -1,4 +1,4 @@
-package nico.ed.nnn.zane.nframe.wrapper
+package nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

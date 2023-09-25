@@ -1,4 +1,4 @@
-package nico.ed.nnn.zane.nframe.ui.compose.organisms
+package nico.ed.nnn.zane.nframe.ui.compose.vico
 
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
@@ -7,7 +7,6 @@ import com.patrykandpatrick.vico.core.chart.values.ChartValues
 import com.patrykandpatrick.vico.core.extension.appendCompat
 import com.patrykandpatrick.vico.core.extension.sumOf
 import com.patrykandpatrick.vico.core.extension.transformToSpannable
-import com.patrykandpatrick.vico.core.marker.DefaultMarkerLabelFormatter
 import com.patrykandpatrick.vico.core.marker.Marker
 import com.patrykandpatrick.vico.core.marker.MarkerLabelFormatter
 
