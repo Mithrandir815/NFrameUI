@@ -1,4 +1,4 @@
-package nico.ed.nnn.zane.nframe.wrapper
+package nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper
 
 import com.patrykandpatrick.vico.core.chart.column.ColumnChart
 import com.patrykandpatrick.vico.core.chart.draw.ChartDrawContext

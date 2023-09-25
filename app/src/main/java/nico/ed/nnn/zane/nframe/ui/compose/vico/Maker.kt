@@ -1,4 +1,4 @@
-package nico.ed.nnn.zane.nframe.ui.compose.organisms
+package nico.ed.nnn.zane.nframe.ui.compose.vico
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -7,8 +7,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import com.patrykandpatrick.vico.compose.component.lineComponent
-import com.patrykandpatrick.vico.compose.component.overlayingComponent
-import com.patrykandpatrick.vico.compose.component.shapeComponent
 import com.patrykandpatrick.vico.compose.component.textComponent
 import com.patrykandpatrick.vico.compose.dimensions.dimensionsOf
 import com.patrykandpatrick.vico.core.chart.dimensions.HorizontalDimensions
