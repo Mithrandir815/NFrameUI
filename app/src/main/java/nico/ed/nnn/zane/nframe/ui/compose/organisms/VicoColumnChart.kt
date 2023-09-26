@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.patrykandpatrick.vico.compose.axis.axisLabelComponent
 import com.patrykandpatrick.vico.compose.axis.axisTickComponent
-import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
 import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.component.shapeComponent
 import com.patrykandpatrick.vico.compose.component.textComponent
@@ -25,10 +24,11 @@ import com.patrykandpatrick.vico.core.component.shape.LineComponent
 import com.patrykandpatrick.vico.core.component.shape.Shapes
 import com.patrykandpatrick.vico.core.entry.entryModelOf
 import nico.ed.nnn.zane.nframe.ui.compose.vico.ThresholdBehindLine
-import nico.ed.nnn.zane.nframe.ui.theme.Blue300
-import nico.ed.nnn.zane.nframe.ui.theme.Blue500
 import nico.ed.nnn.zane.nframe.ui.compose.vico.rememberMarker
 import nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper.customColumnChart
+import nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper.rememberCustomBottomAxis
+import nico.ed.nnn.zane.nframe.ui.theme.Blue300
+import nico.ed.nnn.zane.nframe.ui.theme.Blue500
 
 
 private val chartColors = listOf(Blue300, Blue500)
@@ -38,7 +38,7 @@ private const val GUIDELINE_DASH_LENGTH_DP = 3f
 @Composable
 fun VicoColumnChart(
     targetVerticalAxisPosition: Vertical? = null,
-    chartValues: List<Pair<String, Int>> = listOf()
+    chartValues: List<Pair<String, Int>> = listOf(),
 ) {
     val date: List<String> = chartValues.map { it.first }
     val count: List<Int> = chartValues.map { it.second }
@@ -77,11 +77,19 @@ fun VicoColumnChart(
             //チャートで使用するデータ
             model = model,
             //x軸のラベルなどを作成する要素
-            bottomAxis = rememberBottomAxis(
-                label = axisLabelComponent(
-                    textSize = 8.sp,
-                    horizontalPadding = 0.dp,
-                    horizontalMargin = 0.dp
+            bottomAxis = rememberCustomBottomAxis(
+                labels = listOf(
+                    axisLabelComponent(
+                        color = Blue300,
+                        textSize = 8.sp,
+                        horizontalPadding = 0.dp,
+                        horizontalMargin = 0.dp
+                    ), axisLabelComponent(
+                        color = Blue500,
+                        textSize = 8.sp,
+                        horizontalPadding = 0.dp,
+                        horizontalMargin = 0.dp
+                    )
                 ),
                 axis = null,
                 guideline = null,
