@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.patrykandpatrick.vico.compose.axis.axisLabelComponent
 import com.patrykandpatrick.vico.compose.axis.axisTickComponent
-import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.component.shapeComponent
 import com.patrykandpatrick.vico.compose.component.textComponent
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
@@ -25,6 +24,7 @@ import com.patrykandpatrick.vico.core.component.shape.Shapes
 import com.patrykandpatrick.vico.core.entry.entryModelOf
 import nico.ed.nnn.zane.nframe.ui.compose.vico.ThresholdBehindLine
 import nico.ed.nnn.zane.nframe.ui.compose.vico.rememberMarker
+import nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper.Chart
 import nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper.customColumnChart
 import nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper.rememberCustomBottomAxis
 import nico.ed.nnn.zane.nframe.ui.theme.Blue300
