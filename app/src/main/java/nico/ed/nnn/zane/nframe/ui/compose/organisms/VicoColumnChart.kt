@@ -1,5 +1,6 @@
 package nico.ed.nnn.zane.nframe.ui.compose.organisms
 
+import android.text.TextUtils
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -29,6 +30,7 @@ import nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper.customColumnChart
 import nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper.rememberCustomBottomAxis
 import nico.ed.nnn.zane.nframe.ui.theme.Blue300
 import nico.ed.nnn.zane.nframe.ui.theme.Blue500
+import nico.ed.nnn.zane.nframe.ui.theme.Gray500
 
 
 private val chartColors = listOf(Blue300, Blue500)
@@ -80,15 +82,16 @@ fun VicoColumnChart(
             bottomAxis = rememberCustomBottomAxis(
                 labels = listOf(
                     axisLabelComponent(
-                        color = Blue300,
-                        textSize = 8.sp,
+                        color = Gray500,
+                        textSize = 7.sp,
                         horizontalPadding = 0.dp,
-                        horizontalMargin = 0.dp
+                        horizontalMargin = 0.dp,
+                        ellipsize = TextUtils.TruncateAt.MARQUEE
                     ), axisLabelComponent(
                         color = Blue500,
                         textSize = 8.sp,
                         horizontalPadding = 0.dp,
-                        horizontalMargin = 0.dp
+                        horizontalMargin = 0.dp,
                     )
                 ),
                 axis = null,
