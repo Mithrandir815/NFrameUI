@@ -1,16 +1,20 @@
-package nico.ed.nnn.zane.nframe.ui.compose.organisms
+package nico.ed.nnn.zane.nframe.ui.compose.vico
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
+import com.patrykandpatrick.vico.compose.component.lineComponent
 import com.patrykandpatrick.vico.compose.component.textComponent
 import com.patrykandpatrick.vico.compose.dimensions.dimensionsOf
 import com.patrykandpatrick.vico.core.chart.dimensions.HorizontalDimensions
 import com.patrykandpatrick.vico.core.chart.insets.Insets
 import com.patrykandpatrick.vico.core.component.marker.MarkerComponent
+import com.patrykandpatrick.vico.core.component.shape.DashedShape
 import com.patrykandpatrick.vico.core.component.shape.ShapeComponent
+import com.patrykandpatrick.vico.core.component.shape.Shapes
 import com.patrykandpatrick.vico.core.component.shape.cornered.Corner
 import com.patrykandpatrick.vico.core.component.shape.cornered.MarkerCorneredShape
 import com.patrykandpatrick.vico.core.component.shape.cornered.RoundedCornerTreatment
@@ -35,10 +39,16 @@ internal fun rememberMarker(): Marker {
         background = labelBackground,
         padding = labelPadding,
     )
-    return remember(label, null, null) {
-        object : MarkerComponent(label, null, null) {
+    val guideline = lineComponent(
+        MaterialTheme.colorScheme.onSurface.copy(GUIDELINE_ALPHA),
+        guidelineThickness,
+        guidelineShape,
+    )
+    return remember(label, null, guideline) {
+        object : MarkerComponent(label, null, guideline) {
             init {
                 indicatorSizeDp = INDICATOR_SIZE_DP
+                //書式に関して定義しますlabelよりも優先されます
                 labelFormatter = DefaultMarkerLabelFormatter
             }
 
@@ -66,5 +76,12 @@ private val labelBackgroundShape = MarkerCorneredShape(
         RoundedCornerTreatment
     )
 )
+private const val GUIDELINE_ALPHA = .2f
+private const val GUIDELINE_DASH_LENGTH_DP = 8f
+private const val GUIDELINE_GAP_LENGTH_DP = 4f
+private val guidelineThickness = 2.dp
+private val guidelineShape = DashedShape(Shapes.pillShape, GUIDELINE_DASH_LENGTH_DP, GUIDELINE_GAP_LENGTH_DP)
 private val labelALLPaddingValue = 8.dp
 private val labelPadding = dimensionsOf(all = labelALLPaddingValue)
+private val indicatorInnerAndCenterComponentPaddingValue = 5.dp
+private val indicatorCenterAndOuterComponentPaddingValue = 10.dp

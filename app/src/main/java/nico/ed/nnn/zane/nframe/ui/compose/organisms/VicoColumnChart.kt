@@ -12,13 +12,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.patrykandpatrick.vico.compose.axis.axisLabelComponent
 import com.patrykandpatrick.vico.compose.axis.axisTickComponent
-import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
-import com.patrykandpatrick.vico.compose.chart.Chart
-import com.patrykandpatrick.vico.compose.chart.column.columnChart
 import com.patrykandpatrick.vico.compose.component.shapeComponent
 import com.patrykandpatrick.vico.compose.component.textComponent
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
-import com.patrykandpatrick.vico.compose.style.currentChartStyle
 import com.patrykandpatrick.vico.core.axis.AxisPosition
 import com.patrykandpatrick.vico.core.axis.AxisPosition.Vertical
 import com.patrykandpatrick.vico.core.axis.formatter.AxisValueFormatter
@@ -26,6 +22,11 @@ import com.patrykandpatrick.vico.core.component.shape.DashedShape
 import com.patrykandpatrick.vico.core.component.shape.LineComponent
 import com.patrykandpatrick.vico.core.component.shape.Shapes
 import com.patrykandpatrick.vico.core.entry.entryModelOf
+import nico.ed.nnn.zane.nframe.ui.compose.vico.ThresholdBehindLine
+import nico.ed.nnn.zane.nframe.ui.compose.vico.rememberMarker
+import nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper.Chart
+import nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper.customColumnChart
+import nico.ed.nnn.zane.nframe.ui.compose.vico.wrapper.rememberCustomBottomAxis
 import nico.ed.nnn.zane.nframe.ui.theme.Blue300
 import nico.ed.nnn.zane.nframe.ui.theme.Blue500
 
@@ -37,7 +38,7 @@ private const val GUIDELINE_DASH_LENGTH_DP = 3f
 @Composable
 fun VicoColumnChart(
     targetVerticalAxisPosition: Vertical? = null,
-    chartValues: List<Pair<String, Int>> = listOf()
+    chartValues: List<Pair<String, Int>> = listOf(),
 ) {
     val date: List<String> = chartValues.map { it.first }
     val count: List<Int> = chartValues.map { it.second }
@@ -50,7 +51,7 @@ fun VicoColumnChart(
             modifier = Modifier
                 .width(336.dp)
                 .height(94.dp),
-            chart = columnChart(
+            chart = customColumnChart(
                 columns = listOf(
                     LineComponent(
                         Blue300.toArgb(),
@@ -73,12 +74,22 @@ fun VicoColumnChart(
                 targetVerticalAxisPosition = targetVerticalAxisPosition,
                 spacing = 10.dp
             ),
+            //チャートで使用するデータ
             model = model,
-            bottomAxis = rememberBottomAxis(
-                label = axisLabelComponent(
-                    textSize = 8.sp,
-                    horizontalPadding = 0.dp,
-                    horizontalMargin = 0.dp
+            //x軸のラベルなどを作成する要素
+            bottomAxis = rememberCustomBottomAxis(
+                labels = listOf(
+                    axisLabelComponent(
+                        color = Blue300,
+                        textSize = 8.sp,
+                        horizontalPadding = 0.dp,
+                        horizontalMargin = 0.dp
+                    ), axisLabelComponent(
+                        color = Blue500,
+                        textSize = 8.sp,
+                        horizontalPadding = 0.dp,
+                        horizontalMargin = 0.dp
+                    )
                 ),
                 axis = null,
                 guideline = null,
@@ -86,6 +97,7 @@ fun VicoColumnChart(
                 tick = axisTickComponent(thickness = 0.dp, strokeWidth = 0.dp),
                 valueFormatter = bottomAxisValueFormatter
             ),
+            //バルーンのを作成する要素
             marker = rememberMarker(),
         )
     }
@@ -99,7 +111,7 @@ private fun rememberThresholdLine(ave: Float): ThresholdBehindLine {
         GUIDELINE_GAP_LENGTH_DP
     )
     val line = shapeComponent(
-        color = Color.Gray.copy(0.1f),
+        color = Color.Black.copy(alpha = 0.2f),
         shape = guidelineShape
     )
     val label = textComponent(
