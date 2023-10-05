@@ -1,7 +1,7 @@
 [versions]
 # バージョンアップ時にリリースビルドができなくなる事象があったため、リリースビルドができるか確認お願いします
 androidGradlePlugin = "8.1.1"
-kotlin = "1.8.21"
+kotlin = "1.9.10"
 material = "1.9.0"
 desugar = "2.0.3"
 animation = "1.4.3"
@@ -33,7 +33,7 @@ media3 = "2.18.7"
 # 2.x に上げると Umayato に接続できなくなるため、1.x で固定している
 # https://github.com/dwango-zane/zane-android/pull/5248#issuecomment-824708689
 accompanist = "0.32.0"
-kotlinxCoroutines = "1.7.1"
+kotlinxCoroutines = "1.7.3"
 ktlint = "11.3.2"
 gmsPlugin = "4.3.15"
 
