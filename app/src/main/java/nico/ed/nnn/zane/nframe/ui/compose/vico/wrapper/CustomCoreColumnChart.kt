@@ -38,7 +38,7 @@ class CustomCoreColumnChart : ColumnChart() {
                 val xSpacingMultiplier = (entry.x - chartValues.minX) / chartValues.xStep
                 check(xSpacingMultiplier % 1f == 0f) { "Each entry’s x value must be a multiple of the x step." }
                 columnCenterX = drawingStart +
-                        (horizontalDimensions.xSpacing * xSpacingMultiplier + column.thicknessDp.half.pixels * chartScale) *
+                        (horizontalDimensions.xSpacing * xSpacingMultiplier + column.thicknessDp.half.pixels * zoom) *
                         layoutDirectionMultiplier
 
                 when (mergeMode) {
@@ -74,7 +74,7 @@ class CustomCoreColumnChart : ColumnChart() {
                         bottom = columnBottom,
                         centerX = columnCenterX,
                         boundingBox = bounds,
-                        thicknessScale = chartScale,
+                        thicknessScale = zoom,
                     )
                 ) {
                     updateMarkerLocationMap(
@@ -84,7 +84,7 @@ class CustomCoreColumnChart : ColumnChart() {
                         column,
                         entryIndex
                     )
-                    column.drawVertical(this, columnTop, columnBottom, columnCenterX, chartScale)
+                    column.drawVertical(this, columnTop, columnBottom, columnCenterX, zoom)
                 }
 
                 if (mergeMode == MergeMode.Grouped) {

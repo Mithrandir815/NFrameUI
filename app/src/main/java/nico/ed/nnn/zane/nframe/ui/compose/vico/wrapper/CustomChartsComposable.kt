@@ -31,6 +31,7 @@ import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChanged
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.chart.column.columnChart
@@ -55,6 +56,7 @@ import com.patrykandpatrick.vico.core.chart.scale.AutoScaleUp
 import com.patrykandpatrick.vico.core.entry.ChartEntryModel
 import com.patrykandpatrick.vico.core.entry.ChartModelProducer
 import com.patrykandpatrick.vico.core.extension.set
+import com.patrykandpatrick.vico.core.extension.spToPx
 import com.patrykandpatrick.vico.core.layout.VirtualLayout
 import com.patrykandpatrick.vico.core.legend.Legend
 import com.patrykandpatrick.vico.core.marker.Marker
@@ -199,7 +201,9 @@ internal fun <Model : ChartEntryModel> ChartImpl(
     val bounds = remember { RectF() }
     val markerTouchPoint = remember { mutableStateOf<Point?>(null) }
     val zoom = remember { mutableStateOf(1f) }
-    val measureContext = getMeasureContext(chartScrollSpec.isScrollEnabled, zoom.value, bounds, horizontalLayout)
+    val measureContext =
+        getMeasureContext(chartScrollSpec.isScrollEnabled, bounds, horizontalLayout, with(
+            LocalContext.current) { ::spToPx })
     val scrollListener = rememberScrollListener(markerTouchPoint)
     val lastMarkerEntryModels = remember { mutableStateOf(emptyList<Marker.EntryModel>()) }
 
@@ -271,7 +275,7 @@ internal fun <Model : ChartEntryModel> ChartImpl(
             horizontalDimensions = horizontalDimensions,
             chartBounds = chart.bounds,
             horizontalScroll = chartScrollState.value,
-            autoScaleUp = autoScaleUp,
+            zoom = zoom.value,
         )
 
         // ガイドラインの下がグラフに隠れるよう、chartDrawContextの定義直後にマーカーの描画して一番後ろに来させる

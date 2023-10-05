@@ -6,9 +6,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.yml.charts.axis.AxisData
+import co.yml.charts.axis.DataCategoryOptions
 import co.yml.charts.common.utils.DataUtils
 import co.yml.charts.ui.barchart.BarChart
 import co.yml.charts.ui.barchart.models.BarChartData
+import co.yml.charts.ui.barchart.models.BarChartType
 
 /**
  * YCharts ライブラリのサンプル実装
@@ -18,7 +20,7 @@ import co.yml.charts.ui.barchart.models.BarChartData
 @Composable
 fun YChartsSample(modifier: Modifier = Modifier) {
     val maxRange = 10
-    val barDatas = DataUtils.getBarChartData(5, maxRange)
+    val barDatas = DataUtils.getBarChartData(5, maxRange, BarChartType.HORIZONTAL, DataCategoryOptions())
     val xAxisData = AxisData.Builder()
         .axisStepSize(30.dp)
         .steps(barDatas.size - 1)

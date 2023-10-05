@@ -15,9 +15,9 @@ import com.patrykandpatrick.vico.core.context.DrawContext
 import com.patrykandpatrick.vico.core.context.MeasureContext
 import com.patrykandpatrick.vico.core.extension.half
 import com.patrykandpatrick.vico.core.extension.orZero
-import com.patrykandpatrick.vico.core.marker.DefaultMarkerLabelFormatter
 import com.patrykandpatrick.vico.core.marker.Marker
 import com.patrykandpatrick.vico.core.marker.MarkerLabelFormatter
+import nico.ed.nnn.zane.nframe.ui.compose.vico.DefaultMarkerLabelFormatter
 
 /**
  * The default implementation of the [Marker] interface.
