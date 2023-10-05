@@ -229,23 +229,19 @@ class CustomHorizontalAxis<Position : AxisPosition.Horizontal>(
         context: MeasureContext,
         outInsets: Insets,
         horizontalDimensions: HorizontalDimensions,
-    ): Unit = with(context) {
-        val scaledHorizontalDimensions = horizontalDimensions.scaled(chartScale)
-        with(outInsets) {
-            start = itemPlacer.getStartHorizontalAxisInset(
-                context,
-                scaledHorizontalDimensions,
-                tickThickness
-            )
-            end = itemPlacer.getEndHorizontalAxisInset(
-                context,
-                scaledHorizontalDimensions,
-                tickThickness
-            )
-            top = if (position.isTop) getDesiredHeight(context, scaledHorizontalDimensions) else 0f
-            bottom =
-                if (position.isBottom) getDesiredHeight(context, scaledHorizontalDimensions) else 0f
-        }
+    ): Unit = with(outInsets) {
+        start = itemPlacer.getStartHorizontalAxisInset(
+            context,
+            horizontalDimensions,
+            context.tickThickness
+        )
+        end = itemPlacer.getEndHorizontalAxisInset(
+            context,
+            horizontalDimensions,
+            context.tickThickness
+        )
+        top = if (position.isTop) getDesiredHeight(context, horizontalDimensions) else 0f
+        bottom = if (position.isBottom) getDesiredHeight(context, horizontalDimensions) else 0f
     }
 
     private fun MeasureContext.getFullXRange(

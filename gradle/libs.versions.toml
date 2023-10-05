@@ -1,6 +1,6 @@
 [versions]
 # バージョンアップ時にリリースビルドができなくなる事象があったため、リリースビルドができるか確認お願いします
-androidGradlePlugin = "8.1.1"
+androidGradlePlugin = "8.1.2"
 kotlin = "1.9.10"
 material = "1.9.0"
 desugar = "2.0.3"
@@ -47,8 +47,6 @@ plotWizard = "0.0.6-alpha"
 # ライブラリ以外のバージョン情報
 compileSdkVersion = "34"
 minSdkVersion = "26"
-versionCode = "135"
-versionName = "4.26.0"
 
 [libraries]
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
