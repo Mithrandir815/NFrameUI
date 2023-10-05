@@ -1,5 +1,6 @@
 package nico.ed.nnn.zane.nframe.ui.compose.vico
 
+import android.text.Layout
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
@@ -10,7 +11,6 @@ import com.patrykandpatrick.vico.compose.component.textComponent
 import com.patrykandpatrick.vico.compose.dimensions.dimensionsOf
 import com.patrykandpatrick.vico.core.chart.dimensions.HorizontalDimensions
 import com.patrykandpatrick.vico.core.chart.insets.Insets
-import com.patrykandpatrick.vico.core.component.marker.MarkerComponent
 import com.patrykandpatrick.vico.core.component.shape.ShapeComponent
 import com.patrykandpatrick.vico.core.component.shape.cornered.Corner
 import com.patrykandpatrick.vico.core.component.shape.cornered.MarkerCorneredShape
@@ -33,6 +33,7 @@ internal fun rememberMarker(): Marker {
         color = Color.White,
         background = labelBackground,
         padding = labelPadding,
+        lineCount = 2,
     )
     val guideline = lineComponent(
         Blue800.copy(alpha = 0.6f),

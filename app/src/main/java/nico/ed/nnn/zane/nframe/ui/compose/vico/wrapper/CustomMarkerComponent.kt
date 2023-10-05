@@ -28,8 +28,8 @@ import com.patrykandpatrick.vico.core.marker.MarkerLabelFormatter
  */
 open class CustomMarkerComponent(
     val label: TextComponent,
-    val indicator: Component?,
-    val guideline: LineComponent?,
+    private val indicator: Component?,
+    private val guideline: LineComponent?,
 ) : Marker {
 
     private val tempBounds = RectF()
@@ -46,7 +46,7 @@ open class CustomMarkerComponent(
      * An optional lambda function that allows for applying the color associated with a given data entry to a
      * [Component].
      */
-    var onApplyEntryColor: ((entryColor: Int) -> Unit)? = null
+    private var onApplyEntryColor: ((entryColor: Int) -> Unit)? = null
 
     /**
      * The [MarkerLabelFormatter] for this marker.
@@ -60,16 +60,15 @@ open class CustomMarkerComponent(
         chartValuesProvider: ChartValuesProvider,
     ): Unit = with(context) {
         drawGuideline(context, bounds, markedEntries)
-        val halfIndicatorSize = indicatorSizeDp.half.pixels
 
         markedEntries.forEachIndexed { _, model ->
             onApplyEntryColor?.invoke(model.color)
             indicator?.draw(
                 context,
-                model.location.x - halfIndicatorSize,
-                model.location.y - halfIndicatorSize,
-                model.location.x + halfIndicatorSize,
-                model.location.y + halfIndicatorSize,
+                model.location.x,
+                model.location.y,
+                model.location.x,
+                model.location.y,
             )
         }
         drawLabel(context, bounds, markedEntries, chartValuesProvider.getChartValues())
@@ -118,7 +117,7 @@ open class CustomMarkerComponent(
             .forEach { x ->
                 guideline?.drawVertical(
                     context,
-                    bounds.top - 15f,
+                    bounds.top - indicatorSizeDp.half,
                     bounds.bottom,
                     x,
                 )

@@ -1,5 +1,8 @@
 package nico.ed.nnn.zane.nframe.ui.compose.organisms
 
+import android.graphics.Typeface.DEFAULT_BOLD
+import android.graphics.Typeface.SANS_SERIF
+import android.graphics.Typeface.SERIF
 import android.text.TextUtils
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -8,6 +11,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.text.font.DeviceFontFamilyName
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.toFontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,6 +42,7 @@ import nico.ed.nnn.zane.nframe.ui.theme.Gray500
 private val chartColors = listOf(Blue300, Blue500)
 private const val GUIDELINE_GAP_LENGTH_DP = 3f
 private const val GUIDELINE_DASH_LENGTH_DP = 3f
+val RobotoCondensed = Font(DeviceFontFamilyName("sans-serif-condensed")).toFontFamily()
 
 @Composable
 fun VicoColumnChart(
@@ -51,13 +58,13 @@ fun VicoColumnChart(
     ProvideChartStyle(rememberChartStyle(chartColors)) {
         Chart(
             modifier = Modifier
-                .width(336.dp)
+                .width(380.dp)
                 .height(94.dp),
             chart = customColumnChart(
                 columns = listOf(
                     LineComponent(
                         Blue300.toArgb(),
-                        12f,
+                        14f,
                         Shapes.roundedCornerShape(
                             topRightPercent = 30,
                             topLeftPercent = 30
@@ -65,7 +72,7 @@ fun VicoColumnChart(
                     ),
                     LineComponent(
                         Blue500.toArgb(),
-                        12f,
+                        14f,
                         Shapes.roundedCornerShape(
                             topRightPercent = 30,
                             topLeftPercent = 30
@@ -83,15 +90,17 @@ fun VicoColumnChart(
                 labels = listOf(
                     axisLabelComponent(
                         color = Gray500,
-                        textSize = 7.sp,
+                        textSize = 10.sp,
                         horizontalPadding = 0.dp,
                         horizontalMargin = 0.dp,
-                        ellipsize = TextUtils.TruncateAt.MARQUEE
+                        ellipsize = TextUtils.TruncateAt.MARQUEE,
+                        typeface = DEFAULT_BOLD
                     ), axisLabelComponent(
                         color = Blue500,
-                        textSize = 8.sp,
+                        textSize = 10.sp,
                         horizontalPadding = 0.dp,
                         horizontalMargin = 0.dp,
+                        typeface = DEFAULT_BOLD
                     )
                 ),
                 axis = null,
@@ -119,7 +128,8 @@ private fun rememberThresholdLine(ave: Float): ThresholdBehindLine {
     )
     val label = textComponent(
         color = Color.Black.copy(alpha = 0.2f),
-        textSize = 8.sp
+        textSize = 8.sp,
+        lineCount = 2
     )
     return remember(line, label) {
         ThresholdBehindLine(
