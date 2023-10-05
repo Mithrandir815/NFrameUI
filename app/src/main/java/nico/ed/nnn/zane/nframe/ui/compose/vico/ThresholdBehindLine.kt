@@ -61,7 +61,7 @@ data class ThresholdBehindLine(
      */
     constructor(
         thresholdValue: Float,
-        thresholdLabel: CharSequence = "平均",
+        thresholdLabel: CharSequence = "平\n均",
         lineComponent: ShapeComponent = ShapeComponent(),
         minimumLineThicknessDp: Float = DefaultDimens.THRESHOLD_LINE_THICKNESS,
         labelComponent: TextComponent = textComponent(),
@@ -106,7 +106,8 @@ data class ThresholdBehindLine(
 
         lineComponent.draw(
             context = context,
-            left = bounds.left + 65f,
+            // 平均線を短くしてその余白に平均がくるように設定
+            left = bounds.left + 60f,
             right = bounds.right,
             top = topY,
             bottom = bottomY,

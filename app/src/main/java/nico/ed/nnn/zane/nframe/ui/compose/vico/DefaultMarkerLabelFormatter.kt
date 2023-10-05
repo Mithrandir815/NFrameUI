@@ -17,7 +17,7 @@ import com.patrykandpatrick.vico.core.marker.MarkerLabelFormatter
  */
 object DefaultMarkerLabelFormatter : MarkerLabelFormatter {
 
-    private const val PATTERN = "%d"
+    private const val PATTERN = "12月25日\n%d"
 
     override fun getLabel(
         markedEntries: List<Marker.EntryModel>,

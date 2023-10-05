@@ -1,8 +1,8 @@
 package nico.ed.nnn.zane.nframe.ui.compose.organisms
 
-import android.graphics.Typeface
 import android.graphics.Typeface.DEFAULT_BOLD
 import android.graphics.Typeface.SANS_SERIF
+import android.graphics.Typeface.SERIF
 import android.text.TextUtils
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -58,13 +58,13 @@ fun VicoColumnChart(
     ProvideChartStyle(rememberChartStyle(chartColors)) {
         Chart(
             modifier = Modifier
-                .width(336.dp)
+                .width(380.dp)
                 .height(94.dp),
             chart = customColumnChart(
                 columns = listOf(
                     LineComponent(
                         Blue300.toArgb(),
-                        12f,
+                        14f,
                         Shapes.roundedCornerShape(
                             topRightPercent = 30,
                             topLeftPercent = 30
@@ -72,7 +72,7 @@ fun VicoColumnChart(
                     ),
                     LineComponent(
                         Blue500.toArgb(),
-                        12f,
+                        14f,
                         Shapes.roundedCornerShape(
                             topRightPercent = 30,
                             topLeftPercent = 30
@@ -94,7 +94,7 @@ fun VicoColumnChart(
                         horizontalPadding = 0.dp,
                         horizontalMargin = 0.dp,
                         ellipsize = TextUtils.TruncateAt.MARQUEE,
-                        typeface = Typeface.CustomFallbackBuilder(RobotoCondensed)
+                        typeface = DEFAULT_BOLD
                     ), axisLabelComponent(
                         color = Blue500,
                         textSize = 10.sp,
@@ -128,7 +128,8 @@ private fun rememberThresholdLine(ave: Float): ThresholdBehindLine {
     )
     val label = textComponent(
         color = Color.Black.copy(alpha = 0.2f),
-        textSize = 8.sp
+        textSize = 8.sp,
+        lineCount = 2
     )
     return remember(line, label) {
         ThresholdBehindLine(
