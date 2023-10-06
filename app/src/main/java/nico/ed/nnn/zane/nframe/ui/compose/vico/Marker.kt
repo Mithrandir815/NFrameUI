@@ -34,6 +34,7 @@ internal fun rememberMarker(): Marker {
         background = labelBackground,
         padding = labelPadding,
         lineCount = 2,
+        textAlignment = Layout.Alignment.ALIGN_CENTER
     )
     val guideline = lineComponent(
         Blue800.copy(alpha = 0.6f),
