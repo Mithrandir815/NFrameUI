@@ -161,13 +161,13 @@ fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 80.dp, bottom = 16.dp),
+                .padding(top = 50.dp),
             contentAlignment = Alignment.BottomCenter
         ) {
             val sample = listOf(
                 //平均の文字をグラフないに収めるために最初のデータを無くす
                 Pair("", 0),
-                Pair("12/25", 10),
+                Pair("25", 10),
                 Pair("2", 9),
                 Pair("3", 9),
                 Pair("4", 8),
