@@ -57,7 +57,7 @@ fun VicoColumnChart(
         Chart(
             modifier = Modifier
                 .width(380.dp)
-                .height(94.dp),
+                .height(140.dp),
             chart = customColumnChart(
                 columns = listOf(
                     LineComponent(

@@ -161,7 +161,7 @@ fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 80.dp, bottom = 16.dp),
+                .padding(top = 50.dp),
             contentAlignment = Alignment.BottomCenter
         ) {
             val sample = listOf(
