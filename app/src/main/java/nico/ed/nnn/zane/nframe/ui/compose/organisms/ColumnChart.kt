@@ -176,7 +176,7 @@ fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
                 Pair("7", 10),
                 Pair("8", 7),
                 Pair("9", 12),
-                Pair("10", 20),
+                Pair("10", 25),
                 Pair("11", 0),
                 Pair("12", 10),
                 Pair("13", 6),

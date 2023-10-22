@@ -49,7 +49,6 @@ android {
 }
 
 dependencies {
-    implementation libs.material3
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
     debugImplementation libs.androidx.compose.ui.tooling
     implementation libs.androidx.compose.animation
@@ -86,5 +85,4 @@ dependencies {
     implementation libs.vico.compose
     // For `compose`. Creates a `ChartStyle` based on an M2 Material Theme.
     implementation libs.vico.compose.m2
-    implementation libs.vico.compose.m3
 }
