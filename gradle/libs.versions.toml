@@ -1,6 +1,6 @@
 [versions]
 # バージョンアップ時にリリースビルドができなくなる事象があったため、リリースビルドができるか確認お願いします
-androidGradlePlugin = "8.1.1"
+androidGradlePlugin = "8.1.2"
 kotlin = "1.9.10"
 material = "1.9.0"
 desugar = "2.0.3"
