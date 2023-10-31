@@ -1,5 +1,6 @@
 package nico.ed.nnn.zane.nframe.ui.compose.organisms
 
+import android.graphics.Typeface
 import android.graphics.Typeface.DEFAULT_BOLD
 import android.text.TextUtils
 import androidx.compose.foundation.layout.height
@@ -40,7 +41,7 @@ import nico.ed.nnn.zane.nframe.ui.theme.Gray500
 private val chartColors = listOf(Blue300, Blue500)
 private const val GUIDELINE_GAP_LENGTH_DP = 3f
 private const val GUIDELINE_DASH_LENGTH_DP = 3f
-val RobotoCondensed = Font(DeviceFontFamilyName("sans-serif-condensed")).toFontFamily()
+val robotoCondensed: Typeface = Typeface.create("sans-serif-condensed", Typeface.BOLD)
 
 @Composable
 fun VicoColumnChart(
@@ -56,7 +57,7 @@ fun VicoColumnChart(
     ProvideChartStyle(rememberChartStyle(chartColors)) {
         Chart(
             modifier = Modifier
-                .width(380.dp)
+                .width(360.dp)
                 .height(140.dp),
             chart = customColumnChart(
                 columns = listOf(
@@ -92,13 +93,13 @@ fun VicoColumnChart(
                         horizontalPadding = 0.dp,
                         horizontalMargin = 0.dp,
                         ellipsize = TextUtils.TruncateAt.MARQUEE,
-                        typeface = DEFAULT_BOLD
+                        typeface = robotoCondensed
                     ), axisLabelComponent(
                         color = Blue500,
                         textSize = 10.sp,
                         horizontalPadding = 0.dp,
                         horizontalMargin = 0.dp,
-                        typeface = DEFAULT_BOLD
+                        typeface = robotoCondensed
                     )
                 ),
                 axis = null,
@@ -144,7 +145,7 @@ private fun rememberThresholdLine(ave: Float): ThresholdBehindLine {
 private fun PreviewVicoColumnChart() {
     val sample = listOf(
         Pair("2", 4),
-        Pair("3", 5),
+        Pair("25", 5),
         Pair("4", 6),
         Pair("5", 7),
         Pair("6", 7),

@@ -167,20 +167,20 @@ fun VerticalBarGraphScreen(modifier: Modifier = Modifier) {
             val sample = listOf(
                 //平均の文字をグラフないに収めるために最初のデータを無くす
                 Pair("", 0),
-                Pair("25", 10),
-                Pair("2", 9),
-                Pair("3", 9),
-                Pair("4", 8),
-                Pair("5", 3),
-                Pair("6", 7),
-                Pair("7", 10),
-                Pair("8", 7),
-                Pair("9", 12),
-                Pair("10", 25),
+                Pair("25", 0),
+                Pair("2", 0),
+                Pair("3", 0),
+                Pair("4", 0),
+                Pair("5", 0),
+                Pair("6", 0),
+                Pair("7", 0),
+                Pair("8", 0),
+                Pair("9", 1),
+                Pair("10", 0),
                 Pair("11", 0),
-                Pair("12", 10),
-                Pair("13", 6),
-                Pair("14", 10),
+                Pair("12", 0),
+                Pair("13", 0),
+                Pair("14", 0),
             )
             VicoColumnChart(
                 chartValues = sample
