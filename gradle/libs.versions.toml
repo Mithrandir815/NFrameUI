@@ -28,7 +28,7 @@ androidxDataStore = "1.0.0"
 androidxTestCore = "1.5.0"
 androidxTestRunner = "1.5.2"
 androidxTestRules = "1.5.0"
-coil = "2.4.0"
+coil = "2.5.0"
 media3 = "2.18.7"
 # 2.x に上げると Umayato に接続できなくなるため、1.x で固定している
 # https://github.com/dwango-zane/zane-android/pull/5248#issuecomment-824708689
